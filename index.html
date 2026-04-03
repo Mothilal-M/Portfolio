@@ -675,6 +675,32 @@
             box-shadow: 0 12px 40px rgba(236, 72, 153, 0.5);
         }
 
+        .btn:focus-visible,
+        .project-link:focus-visible,
+        .nav-menu a:focus-visible {
+            outline: 2px solid var(--cyan);
+            outline-offset: 3px;
+            border-radius: 8px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .cursor,
+            .cursor-follower,
+            .orb,
+            .bg-canvas,
+            #particles,
+            .scroll-indicator {
+                display: none !important;
+            }
+        }
+
         /* Scroll indicator */
         .scroll-indicator {
             position: absolute;
@@ -1361,25 +1387,28 @@
     <section id="home" class="hero" aria-label="Hero section">
         <article class="hero-content" itemscope itemtype="https://schema.org/Person">
             <div class="hero-badge">
-                <span>Available for opportunities</span>
+                <span>Open to backend and platform engineering roles</span>
             </div>
             <h1 class="hero-title" itemprop="name">
                 Hi, I'm <span class="gradient-text" itemprop="givenName">Mothilal</span>
             </h1>
             <p class="hero-subtitle" itemprop="description">
-                <strong>Software Engineer</strong> and <strong>Python Developer</strong> crafting innovative digital experiences at <span itemprop="worksFor">10xscale.ai</span>. 
-                Passionate about clean code, scalable architecture, and cutting-edge technology.
+                <strong>Software Engineer</strong> focused on building reliable backend systems with <strong>Python</strong>, <strong>FastAPI</strong>, and <strong>GCP</strong> at <span itemprop="worksFor">10xscale.ai</span>. 
+                I deliver production-ready APIs, performance improvements, and scalable cloud workflows for fast-moving product teams.
             </p>
             <div class="hero-cta">
-                <a href="#projects" class="btn btn-primary" title="View Mothilal's Projects">
-                    <span>View My Work</span>
+                <a href="#projects" class="btn btn-primary" data-track="cta-projects" title="View Mothilal's Projects">
+                    <span>View Case Studies</span>
                     <span>→</span>
                 </a>
-                <a href="#contact" class="btn btn-secondary" title="Contact Mothilal">
-                    <span>Let's Connect</span>
+                <a href="#contact" class="btn btn-secondary" data-track="cta-hire" title="Hire Mothilal">
+                    <span>Hire Mothilal</span>
                 </a>
-                <a href="animated-portfolio.html" class="btn btn-animated-portfolio" title="View Animated Portfolio">
-                    <span>Animated Portfolio</span>
+                <a href="https://www.linkedin.com/in/mothilal-m-04803a227" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" data-track="cta-linkedin-profile" title="View Mothilal Resume">
+                    <span>View Resume</span>
+                </a>
+                <a href="animated-portfolio.html" class="btn btn-animated-portfolio" data-track="cta-animated-demo" title="View Animated Portfolio Demo">
+                    <span>Animated Demo</span>
                     <span>✦</span>
                 </a>
             </div>
@@ -1393,9 +1422,9 @@
     <section id="about" class="section" aria-label="About Mothilal">
         <div class="section-header">
             <div class="section-badge">About Me</div>
-            <h2 class="section-title">Building Digital Excellence</h2>
+            <h2 class="section-title">Backend Engineering with Product Impact</h2>
             <p class="section-subtitle">
-                Turning ideas into reality through code, creativity, and collaboration
+                I help teams ship reliable features faster through scalable architecture, clean APIs, and strong execution.
             </p>
         </div>
         <div class="bento-grid" itemscope itemtype="https://schema.org/Person">
@@ -1404,9 +1433,9 @@
                 <h3 class="bento-title">Professional Journey</h3>
                 <p class="bento-description">
                     Currently working as a <strong itemprop="jobTitle">Software Engineer</strong> at <span itemprop="worksFor">10xscale.ai</span> in Hyderabad, 
-                    where I contribute to innovative projects and continuously expand my technical expertise. 
-                    My journey combines a strong foundation in Computer Science with hands-on experience 
-                    in modern development practices.
+                    delivering backend features and cloud integrations used in real product workflows. 
+                    I focus on reducing operational friction, improving API reliability, and building systems 
+                    that stay maintainable as usage grows.
                 </p>
             </article>
             <article class="bento-item">
@@ -1414,27 +1443,26 @@
                 <h3 class="bento-title">Education</h3>
                 <p class="bento-description" itemprop="alumniOf" itemscope itemtype="https://schema.org/CollegeOrUniversity">
                     Bachelor's Degree in Computer Science from <span itemprop="name">Government Arts College, Coimbatore</span> (2021-2024). 
-                    Built a solid foundation in algorithms, data structures, and software engineering principles 
-                    that I apply daily in real-world projects.
+                    This foundation in algorithms, data structures, and system design now supports my day-to-day 
+                    work on API design, debugging production issues, and performance-oriented delivery.
                 </p>
             </article>
             <article class="bento-item">
                 <div class="bento-icon" aria-hidden="true">🚀</div>
                 <h3 class="bento-title">What Mothilal Does</h3>
                 <p class="bento-description" itemprop="knowsAbout">
-                    Specializing in <strong>backend development</strong> with <strong>Python</strong> & <strong>FastAPI</strong>, 
-                    <strong>cloud infrastructure</strong> on <strong>GCP</strong>, 
-                    and building scalable <strong>microservices</strong>. I love tackling complex challenges and creating 
-                    efficient, maintainable solutions that make a real impact.
+                    Specializing in <strong>backend development</strong> with <strong>Python</strong> and <strong>FastAPI</strong>, 
+                    <strong>cloud infrastructure</strong> on <strong>GCP</strong>, and scalable <strong>microservices</strong>. 
+                    I prioritize measurable outcomes: faster response times, cleaner deployments, and dependable systems.
                 </p>
             </article>
             <article class="bento-item">
                 <div class="bento-icon" aria-hidden="true">🎮</div>
                 <h3 class="bento-title">Beyond Code</h3>
                 <p class="bento-description">
-                    When I'm not coding, you'll find me playing chess, reading about technology and personal 
-                    development, or exploring the latest in gaming technology. I believe in continuous learning 
-                    and staying curious about emerging trends.
+                    Outside work, I enjoy chess, reading about technology, and exploring new product ideas. 
+                    Continuous learning helps me bring clearer decisions, better trade-offs, and stronger collaboration
+                    into engineering work.
                 </p>
             </article>
         </div>
@@ -1524,7 +1552,7 @@
             <div class="section-badge">Career Path</div>
             <h2 class="section-title">Professional Experience</h2>
             <p class="section-subtitle">
-                Mothilal's journey in the tech industry
+                Building backend systems that support product growth and dependable delivery.
             </p>
         </div>
         <div class="timeline" itemscope itemtype="https://schema.org/Person">
@@ -1537,8 +1565,9 @@
                     <time itemprop="startDate" datetime="2024-08">August 2024</time> - Present
                 </div>
                 <p style="color: var(--text-secondary); margin-top: 1rem; line-height: 1.7;" itemprop="description">
-                    Building scalable backend systems and cloud infrastructure. Working with <strong>Python</strong>, <strong>FastAPI</strong>, 
-                    <strong>Docker</strong>, and <strong>Google Cloud Platform</strong> to deliver high-performance solutions.
+                    Designing and shipping backend services with <strong>Python</strong>, <strong>FastAPI</strong>, 
+                    <strong>Docker</strong>, and <strong>Google Cloud Platform</strong>. Key focus areas include API reliability, deployment consistency,
+                    and improving engineering velocity through practical automation.
                 </p>
             </article>
         </div>
@@ -1550,7 +1579,7 @@
             <div class="section-badge">Portfolio</div>
             <h2 class="section-title">Featured Projects by Mothilal</h2>
             <p class="section-subtitle">
-                Showcasing Mothilal's development work and technical expertise
+                Selected work with clear problem context, role, stack, and measurable outcomes.
             </p>
         </div>
         <div class="projects-grid" itemscope itemtype="https://schema.org/ItemList">
@@ -1559,15 +1588,20 @@
                 <div class="project-content">
                     <h3 class="project-title" itemprop="name">College Admission Seat Matrix</h3>
                     <p class="project-description" itemprop="description">
-                        A comprehensive PHP-based web application designed to streamline and automate 
-                        the seat distribution process in educational institutions.
+                        <strong>Problem:</strong> manual seat allocation caused delays and inconsistencies.<br>
+                        <strong>Role:</strong> built end-to-end admission workflow and reporting modules.<br>
+                        <strong>Outcome:</strong> improved seat publishing speed and reduced manual coordination overhead.
                     </p>
                     <div class="project-tags">
                         <span class="project-tag">PHP</span>
                         <span class="project-tag">MySQL</span>
                         <span class="project-tag">JavaScript</span>
-                        <span class="project-tag">Web Design</span>
+                        <span class="project-tag">Admin Workflows</span>
                     </div>
+                    <a href="https://github.com/mothilal" target="_blank" rel="noopener noreferrer" class="project-link" data-track="project-seat-matrix-source" title="Mothilal GitHub Profile">
+                        <span>View Source Profile</span>
+                        <span>↗</span>
+                    </a>
                 </div>
             </article>
             <article class="project-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/WebSite">
@@ -1575,8 +1609,9 @@
                 <div class="project-content">
                     <h3 class="project-title" itemprop="name">Portfolio Website</h3>
                     <p class="project-description" itemprop="description">
-                        A modern, responsive portfolio website showcasing Mothilal's web development capabilities 
-                        with cutting-edge technologies and design principles.
+                        <strong>Problem:</strong> needed a single place to communicate skills and work quality.<br>
+                        <strong>Role:</strong> designed and built the full UX, content, and front-end implementation.<br>
+                        <strong>Outcome:</strong> improved discoverability and created a stronger recruiter/client-ready profile.
                     </p>
                     <div class="project-tags">
                         <span class="project-tag">HTML5</span>
@@ -1584,9 +1619,13 @@
                         <span class="project-tag">JavaScript</span>
                         <span class="project-tag">Responsive Design</span>
                     </div>
-                    <a href="https://mothilal.xyz" target="_blank" rel="noopener noreferrer" class="project-link" itemprop="url" title="Mothilal's Portfolio Website">
+                    <a href="https://mothilal.xyz" target="_blank" rel="noopener noreferrer" class="project-link" data-track="project-portfolio-live" itemprop="url" title="Mothilal's Portfolio Website">
                         <span>View Live</span>
                         <span>→</span>
+                    </a>
+                    <a href="https://github.com/mothilal/Portfolio" target="_blank" rel="noopener noreferrer" class="project-link" data-track="project-portfolio-source" title="Portfolio source code">
+                        <span>View Source</span>
+                        <span>↗</span>
                     </a>
                 </div>
             </article>
@@ -1595,8 +1634,9 @@
                 <div class="project-content">
                     <h3 class="project-title" itemprop="name">10xMindPlay</h3>
                     <p class="project-description" itemprop="description">
-                        A comprehensive cognitive training platform designed to assess and strengthen memory, 
-                        attention, processing speed, and cognitive flexibility.
+                        <strong>Problem:</strong> users needed engaging, measurable cognitive practice online.<br>
+                        <strong>Role:</strong> contributed to product engineering and interaction-focused frontend workflows.<br>
+                        <strong>Outcome:</strong> launched a live interactive platform with structured cognitive challenges.
                     </p>
                     <div class="project-tags">
                         <span class="project-tag">AI</span>
@@ -1604,11 +1644,48 @@
                         <span class="project-tag">Web App</span>
                         <span class="project-tag">Modern UI</span>
                     </div>
-                    <a href="https://10xmindplay.mothilal.xyz/" target="_blank" rel="noopener noreferrer" class="project-link" itemprop="url" title="10xMindPlay by Mothilal">
+                    <a href="https://10xmindplay.mothilal.xyz/" target="_blank" rel="noopener noreferrer" class="project-link" data-track="project-mindplay-live" itemprop="url" title="10xMindPlay by Mothilal">
                         <span>View Live</span>
                         <span>→</span>
                     </a>
+                    <a href="https://github.com/mothilal" target="_blank" rel="noopener noreferrer" class="project-link" data-track="project-mindplay-source" title="Mothilal GitHub Profile">
+                        <span>View Source Profile</span>
+                        <span>↗</span>
+                    </a>
                 </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Collaboration Highlights -->
+    <section id="highlights" class="section" aria-label="Collaboration highlights">
+        <div class="section-header">
+            <div class="section-badge">Trust Signals</div>
+            <h2 class="section-title">Why Teams Like Working With Me</h2>
+            <p class="section-subtitle">
+                Communication-first delivery, reliable ownership, and practical engineering decisions.
+            </p>
+        </div>
+        <div class="bento-grid">
+            <article class="bento-item">
+                <div class="bento-icon" aria-hidden="true">🤝</div>
+                <h3 class="bento-title">Collaboration</h3>
+                <p class="bento-description">Known for clear communication with product and engineering teams across planning, delivery, and iteration.</p>
+            </article>
+            <article class="bento-item">
+                <div class="bento-icon" aria-hidden="true">⚙️</div>
+                <h3 class="bento-title">Execution</h3>
+                <p class="bento-description">Bias toward shipping production-ready solutions with stable APIs, clean code, and maintainable architecture.</p>
+            </article>
+            <article class="bento-item">
+                <div class="bento-icon" aria-hidden="true">📈</div>
+                <h3 class="bento-title">Outcome Focus</h3>
+                <p class="bento-description">Prioritizes measurable impact: faster delivery cycles, reduced manual effort, and better reliability.</p>
+            </article>
+            <article class="bento-item">
+                <div class="bento-icon" aria-hidden="true">📄</div>
+                <h3 class="bento-title">Resume & Profiles</h3>
+                <p class="bento-description">Resume and project profile links are included to support recruiter and client evaluation workflows.</p>
             </article>
         </div>
     </section>
@@ -1619,7 +1696,7 @@
             <div class="section-badge">Get In Touch</div>
             <h2 class="section-title">Contact Mothilal</h2>
             <p class="section-subtitle">
-                Have a project in mind? Hire Mothilal for your next software development project
+                Looking to hire a backend engineer? Share your goals and I’ll reply with a clear execution plan.
             </p>
         </div>
         <div class="contact-grid" itemscope itemtype="https://schema.org/Person">
@@ -1661,7 +1738,7 @@
                 </div>
             </div>
             <div class="contact-form">
-                    <form id="contactForm" aria-label="Contact Mothilal Form">
+                    <form id="contactForm" aria-label="Contact Mothilal Form" action="https://formsubmit.co/ajax/mothilal044@gmail.com" method="POST">
                         <!-- Hidden reCAPTCHA token populated on submit -->
                         <input type="hidden" id="recaptchaToken" name="recaptcha_token" value="">
                     <div class="form-group">
@@ -1690,6 +1767,23 @@
     </section>
 
     <script>
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function trackEvent(eventName, params = {}) {
+            if (typeof gtag === 'function') {
+                gtag('event', eventName, params);
+            }
+        }
+
+        document.querySelectorAll('[data-track]').forEach((el) => {
+            el.addEventListener('click', () => {
+                trackEvent('portfolio_click', {
+                    event_category: 'engagement',
+                    event_label: el.getAttribute('data-track')
+                });
+            });
+        });
+
         // Custom cursor
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
@@ -1716,7 +1810,7 @@
 
             requestAnimationFrame(animateCursor);
         }
-        animateCursor();
+        if (!prefersReducedMotion) animateCursor();
 
         // Cursor interactions
         const interactiveElements = document.querySelectorAll('a, button, .btn, .skill-tag, .project-card');
@@ -1779,7 +1873,7 @@
             });
             requestAnimationFrame(animateBackground);
         }
-        animateBackground();
+        if (!prefersReducedMotion) animateBackground();
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
@@ -1846,18 +1940,22 @@
             e.preventDefault();
 
             const formEl = e.target;
+            const formData = new FormData(formEl);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            const contactEndpoint = formEl.getAttribute('action') || '';
 
             // Ensure grecaptcha is ready, then execute for action 'contact'
             if (window.grecaptcha && grecaptcha.enterprise) {
                 try {
                     await grecaptcha.enterprise.ready();
                     const token = await grecaptcha.enterprise.execute('6LfA1zYsAAAAAPr4g_m9ZyooOTETf5pXKWz1gW5R', { action: 'contact' });
-                    // Set token into hidden input so it can be submitted or sent to backend
                     const tokenInput = document.getElementById('recaptchaToken');
                     if (tokenInput) tokenInput.value = token;
+                    formData.set('recaptcha_token', token);
 
-                    // OPTIONAL: send token to your backend verification endpoint
-                    // If you have a server route like POST /verify-recaptcha, send token and action for server-side verification
                     try {
                         await fetch('/verify-recaptcha', {
                             method: 'POST',
@@ -1865,7 +1963,6 @@
                             body: JSON.stringify({ token, action: 'contact' })
                         });
                     } catch (err) {
-                        // ignore network errors for optional verification
                         console.warn('reCAPTCHA verification endpoint not available:', err);
                     }
                 } catch (recapErr) {
@@ -1873,20 +1970,35 @@
                 }
             }
 
-            // Continue with existing mailto fallback behavior
-            const formData = new FormData(formEl);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
-
-            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-            const mailtoLink = `mailto:mothilal044@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-            window.location.href = mailtoLink;
-
-            // Show success message UI
             const btn = formEl.querySelector('button');
             const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>Sending...</span>';
+
+            let sent = false;
+            if (contactEndpoint) {
+                try {
+                    const resp = await fetch(contactEndpoint, {
+                        method: 'POST',
+                        headers: { 'Accept': 'application/json' },
+                        body: formData
+                    });
+                    sent = resp.ok;
+                } catch (err) {
+                    console.warn('Form endpoint failed, falling back to mailto:', err);
+                }
+            }
+
+            if (!sent) {
+                const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+                const mailtoLink = `mailto:mothilal044@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+                window.location.href = mailtoLink;
+            }
+
+            trackEvent('contact_submit', {
+                event_category: 'conversion',
+                event_label: sent ? 'form_endpoint' : 'mailto_fallback'
+            });
+
             btn.innerHTML = '<span>Message Sent! ✓</span>';
             btn.style.background = 'linear-gradient(135deg, #43e97b, #38f9d7)';
 
@@ -1916,28 +2028,32 @@
         });
 
         // Magnetic effect for buttons
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
+        if (!prefersReducedMotion) {
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                });
                 
-                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0, 0)';
+                });
             });
-            
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'translate(0, 0)';
-            });
-        });
+        }
 
         // Parallax effect for orbs
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            document.querySelectorAll('.orb').forEach((orb, index) => {
-                const speed = (index + 1) * 0.1;
-                orb.style.transform = `translateY(${scrolled * speed}px)`;
+        if (!prefersReducedMotion) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                document.querySelectorAll('.orb').forEach((orb, index) => {
+                    const speed = (index + 1) * 0.1;
+                    orb.style.transform = `translateY(${scrolled * speed}px)`;
+                });
             });
-        });
+        }
 
         // Add stagger animation to skill tags
         document.querySelectorAll('.skills-list').forEach((list, listIndex) => {
@@ -1964,6 +2080,7 @@
                 <a href="#skills" style="color: #6366f1; text-decoration: none; margin: 0 1rem;" title="Mothilal's Skills">Skills</a>
                 <a href="#projects" style="color: #6366f1; text-decoration: none; margin: 0 1rem;" title="Mothilal's Projects">Projects</a>
                 <a href="#contact" style="color: #6366f1; text-decoration: none; margin: 0 1rem;" title="Contact Mothilal">Contact</a>
+                <a href="animated-portfolio.html" style="color: #6366f1; text-decoration: none; margin: 0 1rem;" title="Animated portfolio demo">Animated Demo</a>
             </nav>
             <p style="color: #475569; font-size: 0.8rem;">
                 © 2024-2025 <a href="https://mothilal.xyz" style="color: #6366f1; text-decoration: none;" title="Mothilal Portfolio">Mothilal.xyz</a>. All rights reserved.
