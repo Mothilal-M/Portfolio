@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mothilal | Animated Portfolio</title>
+    <title>Mothilal | Animated Portfolio Demo</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <meta name="description" content="Animated demo version of Mothilal's portfolio experience.">
+    <link rel="canonical" href="https://mothilal.xyz/animated-portfolio.html">
+    <meta name="robots" content="index,follow">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -869,7 +872,18 @@
             .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
             .stat-card { padding: 1.5rem 1rem; }
         }
-    </style>
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .cursor-dot, .cursor-ring, .floating-code, .hero-orb, .particles-canvas {
+                display: none !important;
+            }
+        }
+</style>
 </head>
 <body>
 
@@ -898,7 +912,7 @@
 <div class="progress-bar" id="progress-bar"></div>
 
 <!-- Back button -->
-<a href="index.html" class="back-btn" id="back-btn">
+<a href="index.html" class="back-btn" id="back-btn" aria-label="Back to primary portfolio">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
     Back
 </a>
@@ -934,11 +948,11 @@
             </h1>
             <p class="hero-role" id="hero-role">Software Engineer & Python Developer</p>
             <div class="hero-cta" id="hero-cta">
-                <a href="#projects-section" class="hero-cta-btn hero-cta-primary">
+                <a href="#projects-section" class="hero-cta-btn hero-cta-primary" data-track="animated-cta-projects">
                     <span>View Projects</span>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-                <a href="#contact-section" class="hero-cta-btn hero-cta-secondary">
+                <a href="#contact-section" class="hero-cta-btn hero-cta-secondary" data-track="animated-cta-contact">
                     <span>Get In Touch</span>
                 </a>
             </div>
@@ -1242,7 +1256,7 @@
             <h3>10xMindPlay</h3>
             <p>An AI-powered cognitive training platform that combines gamification with intelligent exercises.</p>
             <div class="project-tech"><span>AI</span><span>TypeScript</span><span>Web App</span></div>
-            <a href="https://10xmindplay.mothilal.xyz/" target="_blank" class="project-link">
+            <a href="https://10xmindplay.mothilal.xyz/" target="_blank" rel="noopener noreferrer" class="project-link" data-track="animated-project-live">
                 View Live
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
@@ -1306,7 +1320,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             +91-9787962328
         </a>
-        <a href="https://linkedin.com/in/mothilal-m-04803a227" target="_blank" class="contact-link-item">
+        <a href="https://linkedin.com/in/mothilal-m-04803a227" target="_blank" rel="noopener noreferrer" class="contact-link-item" data-track="animated-contact-linkedin">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             LinkedIn
         </a>
@@ -1323,6 +1337,18 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 
 <script>
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function trackEvent(eventName, params = {}) {
+    if (typeof gtag === 'function') gtag('event', eventName, params);
+}
+
+document.querySelectorAll('[data-track]').forEach((el) => {
+    el.addEventListener('click', () => {
+        trackEvent('portfolio_click', { event_category: 'engagement', event_label: el.getAttribute('data-track') });
+    });
+});
+
 gsap.registerPlugin(ScrollTrigger);
 
 // ============================
@@ -1387,26 +1413,28 @@ class Particle {
 
 for (let i = 0; i < 50; i++) particles.push(new Particle());
 
-(function drawParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 100) {
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.strokeStyle = `rgba(99, 102, 241, ${0.06 * (1 - dist / 100)})`;
-                ctx.lineWidth = 0.5;
-                ctx.stroke();
+if (!prefersReducedMotion) {
+    (function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(99, 102, 241, ${0.06 * (1 - dist / 100)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
             }
         }
-    }
-    requestAnimationFrame(drawParticles);
-})();
+        requestAnimationFrame(drawParticles);
+    })();
+}
 
 // ============================
 // CODE RAIN CANVAS
@@ -1451,7 +1479,7 @@ function drawRain() {
     }
     requestAnimationFrame(drawRain);
 }
-drawRain();
+if (!prefersReducedMotion) drawRain();
 
 // ============================
 // PRELOADER
