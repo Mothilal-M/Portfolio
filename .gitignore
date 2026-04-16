@@ -1,0 +1,13 @@
+# IDE / tooling
+.vscode/
+.idea/
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Nested v2/ has its own .gitignore for node_modules, dist, .astro

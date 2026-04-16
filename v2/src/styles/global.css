@@ -1,0 +1,92 @@
+@import './tokens.css';
+@import '@fontsource-variable/inter/index.css';
+@import '@fontsource-variable/jetbrains-mono/index.css';
+@import '@fontsource/fraunces/400.css';
+@import '@fontsource/fraunces/400-italic.css';
+@import '@fontsource/fraunces/500.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    background: rgb(var(--bg));
+    color: rgb(var(--fg));
+    font-family: theme('fontFamily.sans');
+    font-size: 1rem;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgb(var(--signal) / 0.35);
+    color: rgb(var(--fg));
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  hr,
+  .rule {
+    border: none;
+    height: 1px;
+    background: rgb(var(--rule) / var(--rule-alpha));
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-6 md:px-10;
+  }
+
+  .mono {
+    @apply font-mono text-sm tracking-tight;
+  }
+
+  .muted {
+    color: rgb(var(--fg) / 0.6);
+  }
+
+  .signal-dot::before {
+    content: '';
+    display: inline-block;
+    width: 0.4em;
+    height: 0.4em;
+    border-radius: 50%;
+    background: rgb(var(--signal));
+    margin-right: 0.5em;
+    vertical-align: middle;
+    box-shadow: 0 0 12px rgb(var(--signal) / 0.6);
+  }
+}

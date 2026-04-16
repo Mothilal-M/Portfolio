@@ -1,0 +1,298 @@
+---
+import Base from '@layouts/Base.astro';
+import Nav from '@components/Nav.astro';
+import QuoteBlock from '@components/QuoteBlock.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import { getCollection, getEntry } from 'astro:content';
+import { skills, SKILL_DOMAINS, SKILL_BANDS } from '@/data/skills';
+import { site, stats } from '@/data/site';
+
+const heroQuote = await getEntry('quotes', 'hero');
+const preAbout = await getEntry('quotes', 'pre-about');
+const preSkills = await getEntry('quotes', 'pre-skills');
+const preExp = await getEntry('quotes', 'pre-experience');
+const preWork = await getEntry('quotes', 'pre-work');
+const closing = await getEntry('quotes', 'closing');
+
+const experiences = (await getCollection('experience')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const projects = (await getCollection('projects'))
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base>
+  <Nav />
+
+  <main id="main">
+    {/* ─── HERO (Phase-1 skeleton — terminal island lands in Phase 2) ─── */}
+    <section id="home" class="shell relative pb-20 pt-24 md:pb-32 md:pt-32">
+      <p class="mono signal-dot muted text-sm">Open to backend & platform roles</p>
+      <h1 class="mt-8 font-serif text-display">
+        {site.shortName}
+        <span class="muted">—</span>
+        <em class="italic">{site.tagline.replace(/\.$/, '')}</em>.
+      </h1>
+      <div class="mt-10 max-w-prose">
+        <p class="text-lg leading-relaxed">
+          <strong>{site.role}</strong> focused on building reliable backend systems with
+          <strong>Python</strong>, <strong>FastAPI</strong>, and <strong>GCP</strong> at
+          <a href="https://10xscale.ai" class="underline decoration-signal/50 underline-offset-4">10xscale.ai</a>.
+          I deliver production-ready APIs, performance improvements, and scalable cloud
+          workflows for fast-moving product teams.
+        </p>
+      </div>
+      <div class="mono mt-10 flex flex-wrap gap-4 text-sm">
+        <a
+          href="#work"
+          class="rounded border border-fg/80 bg-fg px-5 py-3 text-bg transition hover:bg-signal hover:text-ink hover:border-signal"
+        >
+          View case studies →
+        </a>
+        <a
+          href="#contact"
+          class="rounded border border-rule/60 px-5 py-3 transition hover:border-signal hover:text-signal"
+        >
+          Hire {site.shortName}
+        </a>
+        <a
+          href={site.socials.linkedin}
+          target="_blank"
+          rel="noopener"
+          class="rounded border border-rule/60 px-5 py-3 transition hover:border-signal hover:text-signal"
+        >
+          Résumé ↗
+        </a>
+      </div>
+
+      {/* Placeholder for terminal — Phase 2 will replace with React island. */}
+      <div class="mono mt-16 w-full max-w-2xl rounded-lg border border-rule/40 bg-fg/[0.02] p-5 text-sm" aria-label="terminal preview">
+        <div class="muted mb-3 flex items-center gap-2 text-xs">
+          <span class="inline-block h-2 w-2 rounded-full bg-red-400/70"></span>
+          <span class="inline-block h-2 w-2 rounded-full bg-yellow-400/70"></span>
+          <span class="inline-block h-2 w-2 rounded-full bg-signal/80"></span>
+          <span class="ml-2">~/mothilal</span>
+        </div>
+        <p><span class="text-signal">➜</span> whoami</p>
+        <p class="muted">mothilal — software engineer · backend · gcp</p>
+        <p class="mt-2"><span class="text-signal">➜</span> curl /api/me</p>
+        <p class="muted">{`{ "status": "available", "open_to": ["backend", "platform"] }`}</p>
+      </div>
+    </section>
+
+    <QuoteBlock text={heroQuote!.data.text} label="Ethos" />
+
+    {/* ─── ABOUT ─── */}
+    <QuoteBlock text={preAbout!.data.text} attribution={preAbout!.data.attribution} label="Pre-about quote" />
+
+    <section id="about" class="shell py-24 md:py-32" aria-label="About">
+      <p class="mono signal-dot muted text-xs uppercase tracking-wider">About</p>
+      <h2 class="mt-4 font-serif text-section-title">Backend engineering with product impact.</h2>
+
+      <div class="mt-12 grid gap-12 md:grid-cols-[2fr_1fr]">
+        <div class="space-y-6 text-lg leading-relaxed">
+          <p>
+            I work as a Software Engineer at <strong>10xscale.ai</strong> in Hyderabad, shipping
+            backend features and cloud integrations that run in real product workflows. My focus is
+            reducing operational friction, improving API reliability, and keeping systems maintainable
+            as usage grows.
+          </p>
+          <p>
+            Before 10xScale, I earned a Bachelor's in Computer Science from
+            Government Arts College, Coimbatore (2021–2024). That foundation in algorithms, data
+            structures, and system design now backs my day-to-day on API design, production debugging,
+            and performance-oriented delivery.
+          </p>
+          <p>
+            Outside work: chess, technology reading, and exploring product ideas. Continuous learning
+            sharpens the trade-offs I bring to engineering problems.
+          </p>
+        </div>
+        <aside class="space-y-6 border-t border-rule/40 pt-6 md:border-l md:border-t-0 md:pl-10 md:pt-0">
+          <p class="mono muted text-xs uppercase tracking-wider">Receipts</p>
+          <dl class="space-y-4">
+            {
+              stats.map((s) => (
+                <div>
+                  <dt class="mono muted text-xs">{s.label}</dt>
+                  <dd class="font-serif text-2xl">{s.value}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    {/* ─── SKILLS MATRIX ─── */}
+    <QuoteBlock text={preSkills!.data.text} attribution={preSkills!.data.attribution} label="Pre-skills quote" />
+
+    <section id="skills" class="shell py-24 md:py-32" aria-label="Skills">
+      <p class="mono signal-dot muted text-xs uppercase tracking-wider">Stack</p>
+      <h2 class="mt-4 font-serif text-section-title">What I reach for, and how often.</h2>
+      <p class="muted mt-4 max-w-prose text-lg">
+        Not a tag cloud. A matrix — rows by domain, columns by how often I actually use a thing in
+        production.
+      </p>
+
+      <div class="mt-12 overflow-x-auto">
+        <table class="mono w-full border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-rule/60">
+              <th class="muted py-3 pr-4 text-left font-normal uppercase tracking-wider text-xs w-32">Domain</th>
+              {
+                SKILL_BANDS.map((band) => (
+                  <th class="muted py-3 pr-4 text-left font-normal uppercase tracking-wider text-xs">
+                    {band}
+                  </th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              SKILL_DOMAINS.map((domain) => (
+                <tr class="border-b border-rule/30 align-top">
+                  <th class="py-5 pr-4 text-left font-serif text-lg italic">{domain}</th>
+                  {SKILL_BANDS.map((band) => {
+                    const cell = skills.filter((s) => s.domain === domain && s.band === band);
+                    return (
+                      <td class="py-5 pr-4">
+                        <ul class="flex flex-wrap gap-x-3 gap-y-1">
+                          {cell.length === 0 ? (
+                            <li class="muted opacity-40">—</li>
+                          ) : (
+                            cell.map((s) => (
+                              <li title={s.note} class="transition-colors hover:text-signal">
+                                {s.name}
+                              </li>
+                            ))
+                          )}
+                        </ul>
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {/* ─── EXPERIENCE ─── */}
+    <QuoteBlock text={preExp!.data.text} attribution={preExp!.data.attribution} label="Pre-experience quote" />
+
+    <section id="experience" class="shell py-24 md:py-32" aria-label="Experience">
+      <p class="mono signal-dot muted text-xs uppercase tracking-wider">Career</p>
+      <h2 class="mt-4 font-serif text-section-title">Receipts over résumé.</h2>
+
+      <ol class="mt-12 space-y-12 border-l border-rule/40 pl-8">
+        {
+          experiences.map((exp) => (
+            <li class="relative">
+              <span class="absolute -left-[34px] top-2 block h-2.5 w-2.5 rounded-full bg-signal shadow-[0_0_16px_rgb(var(--signal)/0.5)]" aria-hidden="true"></span>
+              <p class="mono muted text-xs">
+                {exp.data.startDate} → {exp.data.endDate ?? 'Present'}
+              </p>
+              <h3 class="mt-2 font-serif text-2xl leading-tight">
+                {exp.data.role} · <span class="italic">{exp.data.company}</span>
+              </h3>
+              {exp.data.location && <p class="muted mono mt-1 text-xs">{exp.data.location}</p>}
+              <p class="mt-4 max-w-prose text-lg leading-relaxed">{exp.data.summary}</p>
+              {exp.data.bullets.length > 0 && (
+                <ul class="mt-4 list-disc space-y-2 pl-5 text-base leading-relaxed marker:text-signal">
+                  {exp.data.bullets.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+              )}
+              {exp.data.receipt && (
+                <p class="mono mt-4 inline-block rounded border border-signal/40 px-3 py-1 text-xs">
+                  <span class="text-signal">receipt:</span> {exp.data.receipt.metric} —{' '}
+                  <span class="muted">{exp.data.receipt.detail}</span>
+                </p>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    {/* ─── WORK ─── */}
+    <QuoteBlock text={preWork!.data.text} attribution={preWork!.data.attribution} label="Pre-work quote" />
+
+    <section id="work" class="shell py-24 md:py-32" aria-label="Selected work">
+      <p class="mono signal-dot muted text-xs uppercase tracking-wider">Work</p>
+      <h2 class="mt-4 font-serif text-section-title">Selected case studies.</h2>
+      <p class="muted mt-4 max-w-prose text-lg">
+        Depth over breadth. Each one framed as an API endpoint — problem, approach, outcome.
+      </p>
+
+      <div class="mt-12">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+
+      <a
+        href="/work"
+        class="mono mt-10 inline-flex items-center gap-2 border-b border-rule/40 pb-1 text-sm hover:text-signal hover:border-signal"
+      >
+        All work <span aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    {/* ─── CLOSING + CONTACT ─── */}
+    <QuoteBlock text={closing!.data.text} label="Closing quote" />
+
+    <section id="contact" class="shell py-24 md:py-32" aria-label="Contact">
+      <p class="mono signal-dot muted text-xs uppercase tracking-wider">Contact</p>
+      <h2 class="mt-4 font-serif text-section-title">Let's talk.</h2>
+      <p class="muted mt-4 max-w-prose text-lg">
+        Open to backend, platform, and product engineering roles — freelance or full-time. Calm,
+        written communication preferred.
+      </p>
+
+      <dl class="mono mt-10 grid gap-4 text-sm md:grid-cols-2">
+        <div class="border-t border-rule/40 pt-4">
+          <dt class="muted text-xs uppercase tracking-wider">Email</dt>
+          <dd class="mt-2">
+            <a href={`mailto:${site.email}`} class="hover:text-signal">{site.email}</a>
+          </dd>
+        </div>
+        <div class="border-t border-rule/40 pt-4">
+          <dt class="muted text-xs uppercase tracking-wider">Phone</dt>
+          <dd class="mt-2">
+            <a href={`tel:${site.phone.replace(/\s+/g, '')}`} class="hover:text-signal">{site.phone}</a>
+          </dd>
+        </div>
+        <div class="border-t border-rule/40 pt-4">
+          <dt class="muted text-xs uppercase tracking-wider">LinkedIn</dt>
+          <dd class="mt-2">
+            <a href={site.socials.linkedin} target="_blank" rel="noopener" class="hover:text-signal">
+              /in/mothilal-m ↗
+            </a>
+          </dd>
+        </div>
+        <div class="border-t border-rule/40 pt-4">
+          <dt class="muted text-xs uppercase tracking-wider">GitHub</dt>
+          <dd class="mt-2">
+            <a href={site.socials.github} target="_blank" rel="noopener" class="hover:text-signal">
+              @mothilal ↗
+            </a>
+          </dd>
+        </div>
+      </dl>
+      <p class="mono muted mt-10 text-xs">
+        Phase-1 skeleton — a designed contact form with FormSubmit + reCAPTCHA lands in Phase 5.
+      </p>
+    </section>
+
+    <footer class="shell border-t border-rule/40 py-10">
+      <div class="mono flex flex-wrap items-center justify-between gap-4 text-xs">
+        <p class="muted">© {new Date().getFullYear()} {site.name}. Built calm.</p>
+        <p class="muted">{site.location} · IST (UTC+5:30)</p>
+      </div>
+    </footer>
+  </main>
+</Base>

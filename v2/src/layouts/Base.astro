@@ -1,0 +1,171 @@
+---
+import '@styles/global.css';
+import { site } from '@/data/site';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  pageType?: 'WebSite' | 'ProfilePage' | 'Article' | 'CreativeWork';
+}
+
+const {
+  title = `${site.name} | ${site.role} | Backend Expert`,
+  description = `${site.name} is a ${site.role} at 10xscale.ai specializing in backend development (Python, FastAPI), cloud infrastructure (GCP), Docker, and scalable microservices.`,
+  image = '/mothilal.png',
+  canonical = Astro.url.href,
+  pageType = 'ProfilePage',
+} = Astro.props;
+
+const imageUrl = new URL(image, site.url).toString();
+const canonicalUrl = new URL(canonical, site.url).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <script is:inline>
+      // Theme: apply before paint to avoid flash.
+      (function () {
+        try {
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const resolved = stored || (prefersDark ? 'dark' : 'light');
+          document.documentElement.classList.toggle('dark', resolved === 'dark');
+          document.documentElement.classList.toggle('light', resolved === 'light');
+          document.documentElement.dataset.theme = resolved;
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="Mothilal, Mothilal M, software engineer, Python developer, FastAPI, GCP, backend, cloud engineer, hire Mothilal, Mothilal 10xscale"
+    />
+    <meta name="author" content={site.name} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="theme-color" content="#0B0B0F" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F6F3EC" media="(prefers-color-scheme: light)" />
+
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/mothilal.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/mothilal.png" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={`${site.name} — ${site.role}`} />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:creator" content="@mothilal" />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        '@id': `${site.url}/#person`,
+        name: site.name,
+        givenName: 'Mothilal',
+        familyName: 'M',
+        alternateName: ['Mothilal', 'Mothilal Developer', 'Mothilal Software Engineer'],
+        jobTitle: site.role,
+        description,
+        url: site.url,
+        image: {
+          '@type': 'ImageObject',
+          url: `${site.url}/mothilal.png`,
+          width: 1200,
+          height: 630,
+        },
+        email: `mailto:${site.email}`,
+        telephone: site.phone.replace(/\s+/g, '-'),
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Dharmapuri',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'India',
+        },
+        alumniOf: {
+          '@type': 'CollegeOrUniversity',
+          name: 'Government Arts College, Coimbatore',
+        },
+        worksFor: {
+          '@type': 'Organization',
+          name: '10xscale.ai',
+          url: 'https://10xscale.ai/',
+        },
+        knowsAbout: [
+          'Python',
+          'FastAPI',
+          'Backend Development',
+          'Google Cloud Platform',
+          'Docker',
+          'PostgreSQL',
+          'MySQL',
+          'Redis',
+          'API Development',
+          'Microservices',
+        ],
+        sameAs: [site.socials.linkedin, site.socials.github, site.url],
+      })}
+    />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        '@id': `${site.url}/#website`,
+        url: site.url,
+        name: `${site.name} — ${site.role} Portfolio`,
+        publisher: { '@id': `${site.url}/#person` },
+        inLanguage: 'en-US',
+      })}
+    />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': pageType,
+        url: canonicalUrl,
+        name: title,
+        description,
+        isPartOf: { '@id': `${site.url}/#website` },
+        about: { '@id': `${site.url}/#person` },
+        inLanguage: 'en-US',
+      })}
+    />
+
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-signal focus:px-3 focus:py-2 focus:text-ink"
+    >
+      Skip to content
+    </a>
+    <slot />
+  </body>
+</html>

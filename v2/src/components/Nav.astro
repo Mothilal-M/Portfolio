@@ -1,0 +1,46 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { site } from '@/data/site';
+
+const links = [
+  { href: '/#about', label: 'About' },
+  { href: '/#work', label: 'Work' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/#contact', label: 'Contact' },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-rule/0 bg-bg/80 backdrop-blur-md transition-colors" data-nav>
+  <div class="shell flex h-16 items-center justify-between gap-6">
+    <a href="/" class="font-mono text-sm tracking-tight" aria-label={`${site.name} home`}>
+      <span class="signal-dot"></span>mothilal<span class="muted">.xyz</span>
+    </a>
+    <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm tracking-tight transition-opacity hover:opacity-70"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="flex items-center gap-3">
+      <ThemeToggle />
+    </div>
+  </div>
+</header>
+
+<script>
+  // Add hairline rule to nav when scrolled.
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  if (nav) {
+    const update = () => {
+      nav.classList.toggle('border-rule/60', window.scrollY > 8);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>
