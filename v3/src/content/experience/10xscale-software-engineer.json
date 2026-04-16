@@ -1,0 +1,17 @@
+{
+  "role": "Software Engineer",
+  "company": "10xScale.ai",
+  "location": "Hyderabad, India",
+  "startDate": "2024-08",
+  "summary": "Designing and shipping backend services with Python, FastAPI, Docker, and Google Cloud Platform. Key focus areas: API reliability, deployment consistency, and engineering velocity through practical automation.",
+  "bullets": [
+    "Build and maintain production FastAPI services running on Cloud Run with Cloud SQL-backed persistence.",
+    "Own cloud deployment workflows end-to-end — Docker image builds, CI/CD, environment parity, and rollback hygiene.",
+    "Reduce operational friction by automating data ingestion, internal tooling, and release steps that were previously manual."
+  ],
+  "receipt": {
+    "metric": "Faster, more reliable releases",
+    "detail": "Shipped backend features that now back real product workflows in daily use."
+  },
+  "order": 1
+}

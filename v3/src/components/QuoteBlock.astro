@@ -1,0 +1,21 @@
+---
+export interface Props {
+  text: string;
+  attribution?: string;
+  label?: string;
+}
+const { text, attribution, label } = Astro.props;
+---
+
+<section class="shell py-24 md:py-32" aria-label={label ?? 'Pull quote'}>
+  <hr class="mb-10" />
+  <blockquote class="font-serif italic text-quote leading-tight max-w-[22ch] md:max-w-[28ch]">
+    <span class="text-signal">&ldquo;</span>{text}<span class="text-signal">&rdquo;</span>
+  </blockquote>
+  {
+    attribution && (
+      <cite class="mono muted mt-6 block not-italic">— {attribution}</cite>
+    )
+  }
+  <hr class="mt-10" />
+</section>

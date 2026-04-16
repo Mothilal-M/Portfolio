@@ -1,0 +1,17 @@
+# IDE / tooling
+.vscode/
+.idea/
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# v2/ source only lives on redesign/v2 branch (and main post-Phase-6).
+# When checked out on redesign/v3, any leftover v2/ on disk is noise.
+v2/
+
+# Nested v3/ has its own .gitignore for node_modules, dist, .astro

@@ -1,0 +1,46 @@
+---
+// Theme toggle — inline script runs pre-paint in Base.astro; this button flips it.
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  aria-label="Toggle color theme"
+  class="flex h-9 w-9 items-center justify-center rounded-full border border-rule/40 text-xs transition-colors hover:border-signal hover:text-signal"
+>
+  <span class="sr-only">Toggle theme</span>
+  <svg data-theme-icon="dark" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+  </svg>
+  <svg data-theme-icon="light" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="hidden h-4 w-4">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke-linecap="round" />
+  </svg>
+</button>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  if (btn) {
+    const darkIcon = btn.querySelector<SVGElement>('[data-theme-icon="dark"]');
+    const lightIcon = btn.querySelector<SVGElement>('[data-theme-icon="light"]');
+
+    const syncIcon = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      darkIcon?.classList.toggle('hidden', isDark);
+      lightIcon?.classList.toggle('hidden', !isDark);
+    };
+
+    syncIcon();
+
+    btn.addEventListener('click', () => {
+      const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      document.documentElement.classList.toggle('dark', next === 'dark');
+      document.documentElement.classList.toggle('light', next === 'light');
+      document.documentElement.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {}
+      syncIcon();
+    });
+  }
+</script>

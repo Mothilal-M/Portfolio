@@ -1,0 +1,29 @@
+---
+title: "Portfolio Website"
+role: "Designer & engineer"
+year: "2024"
+stack: ["Astro", "TypeScript", "Tailwind", "GSAP"]
+method: "GET"
+status: "202 In Progress"
+problem: "Needed a single canonical place that communicates technical depth, shipped work, and how I think — beyond a résumé PDF."
+approach: "Editorial typography + a live backend-terminal aesthetic. Structured around six pull-quotes, typed content collections, and API-framed case studies."
+outcome: "A portfolio that reads like an engineering essay and feels like a terminal that's alive — designed to stay maintainable as the body of work grows."
+featured: true
+order: 1
+links:
+  - { label: "Live", href: "https://mothilal.xyz", kind: "live" }
+  - { label: "Source", href: "https://github.com/mothilal/Portfolio", kind: "source" }
+---
+
+The site you're reading. Built as an Astro static site with typed content collections, GSAP-driven motion, and a dark-first (light-capable) design system. A deliberate rewrite of an earlier single-file HTML version.
+
+## Why rebuild
+
+The previous version worked but looked like every other dev portfolio — indigo gradients, glass cards, floating orbs. This rewrite leans into what I actually do (backend engineering) instead of decoration.
+
+## What changed
+
+- Moved from one 2,000-line `index.html` to a typed, component-based Astro project.
+- Replaced gradient-heavy dark theme with an editorial ink/paper palette + one signal color.
+- Projects became API-style endpoints with `method`, `status`, `problem/approach/outcome`.
+- Quotes became structural section openers rather than decoration.

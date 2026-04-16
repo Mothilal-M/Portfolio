@@ -1,0 +1,25 @@
+---
+import Base from '@layouts/Base.astro';
+import Nav from '@components/Nav.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<Base title="Work — Mothilal" description="Case studies: problem, approach, outcome.">
+  <Nav />
+  <main id="main" class="shell py-24 md:py-32">
+    <p class="mono signal-dot muted text-xs uppercase tracking-wider">Work</p>
+    <h1 class="mt-4 font-serif text-display">
+      <em class="italic">ls</em> ./work
+    </h1>
+    <p class="muted mt-6 max-w-prose text-lg">All case studies. Each one framed as a request/response.</p>
+
+    <div class="mt-16">
+      {projects.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </main>
+</Base>

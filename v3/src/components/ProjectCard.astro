@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const { data, slug } = project;
+const statusColor: Record<string, string> = {
+  '200 OK': 'text-signal',
+  '201 Shipped': 'text-signal',
+  '202 In Progress': 'text-fg/70',
+  '204 Archived': 'text-mute',
+};
+---
+
+<article class="group border-t border-rule/40 py-10">
+  <a href={`/work/${slug}`} class="block">
+    <header class="mono flex flex-wrap items-center gap-3 text-xs">
+      <span class="rounded bg-fg/5 px-2 py-0.5 font-semibold">{data.method}</span>
+      <span class="muted">/work/{slug}</span>
+      <span class={statusColor[data.status] ?? 'muted'}>{data.status}</span>
+    </header>
+
+    <h3 class="mt-4 font-serif text-3xl leading-tight tracking-tight md:text-4xl">
+      {data.title}
+    </h3>
+
+    <dl class="mono mt-6 grid gap-1 text-sm md:grid-cols-[auto_1fr] md:gap-x-6">
+      <dt class="muted">role</dt>
+      <dd>{data.role}</dd>
+      <dt class="muted">stack</dt>
+      <dd>{data.stack.join(' · ')}</dd>
+      <dt class="muted">outcome</dt>
+      <dd>{data.outcome}</dd>
+    </dl>
+
+    <span class="mono mt-6 inline-flex items-center gap-2 text-sm text-signal opacity-0 transition-opacity group-hover:opacity-100">
+      read case study <span aria-hidden="true">→</span>
+    </span>
+  </a>
+</article>

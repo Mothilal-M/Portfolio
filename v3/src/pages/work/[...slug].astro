@@ -1,0 +1,78 @@
+---
+import Base from '@layouts/Base.astro';
+import Nav from '@components/Nav.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('projects');
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+}
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+---
+
+<Base
+  title={`${d.title} — Case study | Mothilal`}
+  description={d.problem}
+  pageType="CreativeWork"
+>
+  <Nav />
+  <main id="main" class="shell py-24 md:py-32">
+    <a href="/work" class="mono muted inline-flex items-center gap-2 text-xs uppercase tracking-wider hover:text-signal">
+      <span aria-hidden="true">←</span> back to all work
+    </a>
+
+    <header class="mt-10 border-b border-rule/40 pb-10">
+      <p class="mono flex flex-wrap items-center gap-3 text-xs">
+        <span class="rounded bg-fg/5 px-2 py-0.5 font-semibold">{d.method}</span>
+        <span class="muted">/work/{entry.slug}</span>
+        <span class="text-signal">{d.status}</span>
+        <span class="muted">·</span>
+        <span class="muted">{d.year}</span>
+      </p>
+      <h1 class="mt-6 font-serif text-display">{d.title}</h1>
+      <p class="mono muted mt-6 text-sm">{d.role} · {d.stack.join(' · ')}</p>
+
+      {
+        d.links.length > 0 && (
+          <ul class="mono mt-6 flex flex-wrap gap-4 text-sm">
+            {d.links.map((l) => (
+              <li>
+                <a href={l.href} target="_blank" rel="noopener" class="border-b border-rule/40 pb-0.5 hover:border-signal hover:text-signal">
+                  {l.label} ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+
+    <section class="mt-16 grid gap-10 md:grid-cols-3">
+      <div>
+        <h2 class="mono muted text-xs uppercase tracking-wider">Problem</h2>
+        <p class="mt-3 text-lg leading-relaxed">{d.problem}</p>
+      </div>
+      <div>
+        <h2 class="mono muted text-xs uppercase tracking-wider">Approach</h2>
+        <p class="mt-3 text-lg leading-relaxed">{d.approach}</p>
+      </div>
+      <div>
+        <h2 class="mono muted text-xs uppercase tracking-wider">Outcome</h2>
+        <p class="mt-3 text-lg leading-relaxed">{d.outcome}</p>
+      </div>
+    </section>
+
+    <article class="prose-editorial mt-16 max-w-prose text-lg leading-relaxed [&_h2]:mt-12 [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:italic [&_p]:mt-5 [&_ul]:mt-5 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:marker:text-signal [&_li]:mt-2">
+      <Content />
+    </article>
+  </main>
+</Base>

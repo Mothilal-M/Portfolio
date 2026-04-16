@@ -1,0 +1,286 @@
+---
+import Base from '@layouts/Base.astro';
+import Nav from '@components/Nav.astro';
+import QuoteBlock from '@components/QuoteBlock.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import Graph from '@components/Graph.tsx';
+import { getCollection, getEntry } from 'astro:content';
+import { skills, SKILL_DOMAINS, SKILL_BANDS } from '@/data/skills';
+import { site, stats } from '@/data/site';
+
+const heroQuote = await getEntry('quotes', 'hero');
+const preAbout = await getEntry('quotes', 'pre-about');
+const preSkills = await getEntry('quotes', 'pre-skills');
+const preExp = await getEntry('quotes', 'pre-experience');
+const preWork = await getEntry('quotes', 'pre-work');
+const closing = await getEntry('quotes', 'closing');
+
+const experiences = (await getCollection('experience')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const projects = (await getCollection('projects'))
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base
+  title={`${site.name} | Systems Portfolio — v3 "The Graph"`}
+  description="Interactive 3D portfolio where Mothilal's work, skills, and experience connect as a live topology. Backend engineer (Python / FastAPI / GCP) at 10xscale.ai."
+>
+  <Nav />
+
+  {/*
+    Phase 1 — Graph mounts as a hero-bounded canvas so SSR content remains
+    visible below for verification. Later phases promote it to a fixed
+    full-viewport overlay with panels for each node.
+  */}
+  <section
+    id="graph-hero"
+    class="relative isolate h-[100svh] w-full overflow-hidden border-b border-rule/20"
+    style="background: radial-gradient(ellipse at center, rgb(var(--void) / 1) 0%, rgb(var(--void) / 1) 70%, rgb(10 12 20) 100%);"
+    aria-label="Interactive graph — portfolio topology"
+  >
+    {/* Noscript fallback: static poster so the section never looks broken. */}
+    <noscript>
+      <div class="flex h-full items-center justify-center">
+        <p class="mono text-sm text-signal">
+          This hero requires JavaScript. The content below is fully accessible without it.
+        </p>
+      </div>
+    </noscript>
+
+    <Graph client:only="react" />
+
+    {/* HUD — top-left eyebrow */}
+    <div class="pointer-events-none absolute left-6 top-20 z-10 md:left-10">
+      <p class="mono text-xs uppercase tracking-[0.2em] text-signal/80">
+        v3 · the graph · phase 1
+      </p>
+      <h1 class="mt-3 font-serif text-display leading-none text-paper mix-blend-difference">
+        <span class="italic">mothilal</span><span class="text-signal">.</span>
+      </h1>
+    </div>
+
+    {/* HUD — bottom helper */}
+    <div
+      class="pointer-events-none absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-center"
+      aria-hidden="true"
+    >
+      <p class="mono text-xs uppercase tracking-[0.3em] text-paper/70">
+        drag to orbit
+      </p>
+      <span class="mt-3 inline-block h-8 w-px bg-paper/40"></span>
+      <p class="mono mt-3 text-[10px] uppercase tracking-[0.3em] text-paper/50">
+        scroll for the classic view ↓
+      </p>
+    </div>
+  </section>
+
+  <main id="main" class="relative z-20 bg-bg">
+    <QuoteBlock text={heroQuote!.data.text} label="Ethos" />
+
+    <QuoteBlock text={preAbout!.data.text} attribution={preAbout!.data.attribution} label="Pre-about quote" />
+
+    <section id="about" class="shell py-24 md:py-32" aria-label="About">
+      <p class="mono signal-dot muted text-xs uppercase tracking-wider">About</p>
+      <h2 class="mt-4 font-serif text-section-title">Backend engineering with product impact.</h2>
+
+      <div class="mt-12 grid gap-12 md:grid-cols-[2fr_1fr]">
+        <div class="space-y-6 text-lg leading-relaxed">
+          <p>
+            I work as a Software Engineer at <strong>10xscale.ai</strong> in Hyderabad, shipping
+            backend features and cloud integrations that run in real product workflows. My focus is
+            reducing operational friction, improving API reliability, and keeping systems maintainable
+            as usage grows.
+          </p>
+          <p>
+            Before 10xScale, I earned a Bachelor's in Computer Science from
+            Government Arts College, Coimbatore (2021–2024). That foundation in algorithms, data
+            structures, and system design now backs my day-to-day on API design, production debugging,
+            and performance-oriented delivery.
+          </p>
+          <p>
+            Outside work: chess, technology reading, and exploring product ideas. Continuous learning
+            sharpens the trade-offs I bring to engineering problems.
+          </p>
+        </div>
+        <aside class="space-y-6 border-t border-rule/40 pt-6 md:border-l md:border-t-0 md:pl-10 md:pt-0">
+          <p class="mono muted text-xs uppercase tracking-wider">Receipts</p>
+          <dl class="space-y-4">
+            {
+              stats.map((s) => (
+                <div>
+                  <dt class="mono muted text-xs">{s.label}</dt>
+                  <dd class="font-serif text-2xl">{s.value}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <QuoteBlock text={preSkills!.data.text} attribution={preSkills!.data.attribution} label="Pre-skills quote" />
+
+    <section id="skills" class="shell py-24 md:py-32" aria-label="Skills">
+      <p class="mono signal-dot muted text-xs uppercase tracking-wider">Stack</p>
+      <h2 class="mt-4 font-serif text-section-title">What I reach for, and how often.</h2>
+      <p class="muted mt-4 max-w-prose text-lg">
+        Not a tag cloud. A matrix — rows by domain, columns by how often I actually use a thing in
+        production.
+      </p>
+
+      <div class="mt-12 overflow-x-auto">
+        <table class="mono w-full border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-rule/60">
+              <th class="muted py-3 pr-4 text-left font-normal uppercase tracking-wider text-xs w-32">Domain</th>
+              {
+                SKILL_BANDS.map((band) => (
+                  <th class="muted py-3 pr-4 text-left font-normal uppercase tracking-wider text-xs">
+                    {band}
+                  </th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              SKILL_DOMAINS.map((domain) => (
+                <tr class="border-b border-rule/30 align-top">
+                  <th class="py-5 pr-4 text-left font-serif text-lg italic">{domain}</th>
+                  {SKILL_BANDS.map((band) => {
+                    const cell = skills.filter((s) => s.domain === domain && s.band === band);
+                    return (
+                      <td class="py-5 pr-4">
+                        <ul class="flex flex-wrap gap-x-3 gap-y-1">
+                          {cell.length === 0 ? (
+                            <li class="muted opacity-40">—</li>
+                          ) : (
+                            cell.map((s) => (
+                              <li title={s.note} class="transition-colors hover:text-signal">
+                                {s.name}
+                              </li>
+                            ))
+                          )}
+                        </ul>
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <QuoteBlock text={preExp!.data.text} attribution={preExp!.data.attribution} label="Pre-experience quote" />
+
+    <section id="experience" class="shell py-24 md:py-32" aria-label="Experience">
+      <p class="mono signal-dot muted text-xs uppercase tracking-wider">Career</p>
+      <h2 class="mt-4 font-serif text-section-title">Receipts over résumé.</h2>
+
+      <ol class="mt-12 space-y-12 border-l border-rule/40 pl-8">
+        {
+          experiences.map((exp) => (
+            <li class="relative">
+              <span class="absolute -left-[34px] top-2 block h-2.5 w-2.5 rounded-full bg-signal shadow-[0_0_16px_rgb(var(--signal)/0.5)]" aria-hidden="true"></span>
+              <p class="mono muted text-xs">
+                {exp.data.startDate} → {exp.data.endDate ?? 'Present'}
+              </p>
+              <h3 class="mt-2 font-serif text-2xl leading-tight">
+                {exp.data.role} · <span class="italic">{exp.data.company}</span>
+              </h3>
+              {exp.data.location && <p class="muted mono mt-1 text-xs">{exp.data.location}</p>}
+              <p class="mt-4 max-w-prose text-lg leading-relaxed">{exp.data.summary}</p>
+              {exp.data.bullets.length > 0 && (
+                <ul class="mt-4 list-disc space-y-2 pl-5 text-base leading-relaxed marker:text-signal">
+                  {exp.data.bullets.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+              )}
+              {exp.data.receipt && (
+                <p class="mono mt-4 inline-block rounded border border-signal/40 px-3 py-1 text-xs">
+                  <span class="text-signal">receipt:</span> {exp.data.receipt.metric} —{' '}
+                  <span class="muted">{exp.data.receipt.detail}</span>
+                </p>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <QuoteBlock text={preWork!.data.text} attribution={preWork!.data.attribution} label="Pre-work quote" />
+
+    <section id="work" class="shell py-24 md:py-32" aria-label="Selected work">
+      <p class="mono signal-dot muted text-xs uppercase tracking-wider">Work</p>
+      <h2 class="mt-4 font-serif text-section-title">Selected case studies.</h2>
+      <p class="muted mt-4 max-w-prose text-lg">
+        Depth over breadth. Each one framed as an API endpoint — problem, approach, outcome.
+      </p>
+
+      <div class="mt-12">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+
+      <a
+        href="/work"
+        class="mono mt-10 inline-flex items-center gap-2 border-b border-rule/40 pb-1 text-sm hover:text-signal hover:border-signal"
+      >
+        All work <span aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    <QuoteBlock text={closing!.data.text} label="Closing quote" />
+
+    <section id="contact" class="shell py-24 md:py-32" aria-label="Contact">
+      <p class="mono signal-dot muted text-xs uppercase tracking-wider">Contact</p>
+      <h2 class="mt-4 font-serif text-section-title">Let's talk.</h2>
+      <p class="muted mt-4 max-w-prose text-lg">
+        Open to backend, platform, and product engineering roles — freelance or full-time. Calm,
+        written communication preferred.
+      </p>
+
+      <dl class="mono mt-10 grid gap-4 text-sm md:grid-cols-2">
+        <div class="border-t border-rule/40 pt-4">
+          <dt class="muted text-xs uppercase tracking-wider">Email</dt>
+          <dd class="mt-2">
+            <a href={`mailto:${site.email}`} class="hover:text-signal">{site.email}</a>
+          </dd>
+        </div>
+        <div class="border-t border-rule/40 pt-4">
+          <dt class="muted text-xs uppercase tracking-wider">Phone</dt>
+          <dd class="mt-2">
+            <a href={`tel:${site.phone.replace(/\s+/g, '')}`} class="hover:text-signal">{site.phone}</a>
+          </dd>
+        </div>
+        <div class="border-t border-rule/40 pt-4">
+          <dt class="muted text-xs uppercase tracking-wider">LinkedIn</dt>
+          <dd class="mt-2">
+            <a href={site.socials.linkedin} target="_blank" rel="noopener" class="hover:text-signal">
+              /in/mothilal-m ↗
+            </a>
+          </dd>
+        </div>
+        <div class="border-t border-rule/40 pt-4">
+          <dt class="muted text-xs uppercase tracking-wider">GitHub</dt>
+          <dd class="mt-2">
+            <a href={site.socials.github} target="_blank" rel="noopener" class="hover:text-signal">
+              @mothilal ↗
+            </a>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <footer class="shell border-t border-rule/40 py-10">
+      <div class="mono flex flex-wrap items-center justify-between gap-4 text-xs">
+        <p class="muted">© {new Date().getFullYear()} {site.name}. v3 · The Graph.</p>
+        <p class="muted">{site.location} · IST (UTC+5:30)</p>
+      </div>
+    </footer>
+  </main>
+</Base>

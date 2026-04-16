@@ -1,0 +1,29 @@
+---
+import Base from '@layouts/Base.astro';
+import Nav from '@components/Nav.astro';
+---
+
+<Base title="404 — command not found | Mothilal" description="The page you're looking for doesn't exist.">
+  <Nav />
+  <main id="main" class="shell flex min-h-[70vh] flex-col justify-center py-24">
+    <p class="mono muted text-xs uppercase tracking-wider">404</p>
+    <h1 class="mt-4 font-serif text-display">
+      <em class="italic">command</em>
+      <span class="muted">:</span> not found
+    </h1>
+    <div class="mono mt-10 max-w-xl rounded-lg border border-rule/40 bg-fg/[0.02] p-5 text-sm">
+      <p><span class="text-signal">➜</span> cat <span id="path-echo">/</span></p>
+      <p class="muted">cat: no such file or directory</p>
+      <p class="mt-3"><span class="text-signal">➜</span> did you mean:</p>
+      <ul class="mt-1 space-y-1">
+        <li><a href="/" class="hover:text-signal">/</a> <span class="muted">— home</span></li>
+        <li><a href="/work" class="hover:text-signal">/work</a> <span class="muted">— case studies</span></li>
+        <li><a href="/#contact" class="hover:text-signal">/#contact</a> <span class="muted">— say hi</span></li>
+      </ul>
+    </div>
+  </main>
+  <script>
+    const el = document.getElementById('path-echo');
+    if (el) el.textContent = window.location.pathname;
+  </script>
+</Base>

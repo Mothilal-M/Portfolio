@@ -1,0 +1,31 @@
+---
+title: "College Admission Seat Matrix"
+role: "Full-stack engineer"
+year: "2023"
+stack: ["PHP", "MySQL", "JavaScript", "Admin Workflows"]
+method: "POST"
+status: "201 Shipped"
+problem: "Manual seat allocation caused delays, errors, and inconsistent reporting across admission cycles."
+approach: "Built an end-to-end admission workflow with relational modeling, role-based admin panels, and structured reporting."
+outcome: "Faster seat publishing and a large reduction in manual coordination overhead for admissions staff."
+featured: true
+order: 3
+links:
+  - { label: "Source profile", href: "https://github.com/mothilal", kind: "source" }
+---
+
+An admission-management system that replaced spreadsheet-driven seat allocation with a proper workflow: intake forms, verification, matrix-based seat assignment, and exportable reports. Shipped and operated during a live admission cycle.
+
+## Why it mattered
+
+The previous process depended on multiple people copying numbers between sheets. Every delay cascaded into student-facing delays. The new system made the source of truth one database and the interaction one UI.
+
+## What was built
+
+- Admin-side workflows for student verification, document checks, and approval states.
+- A seat-matrix view that let staff assign and reassign across branches with live conflict checks.
+- Reporting exports that downstream offices could consume without asking engineering for help.
+
+## Outcome
+
+Reduced manual coordination overhead and shortened the time between decision and publication of results.

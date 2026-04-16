@@ -1,0 +1,35 @@
+/* Design tokens — the whole system in ~30 lines.
+   Colors are space-separated RGB triplets so Tailwind can apply alpha. */
+
+:root {
+  --ink: 11 11 15;
+  --paper: 246 243 236;
+  --signal: 124 255 107;
+  --cyan: 94 230 255;
+  --mute: 138 138 148;
+  --void: 5 6 11;
+
+  color-scheme: light;
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --rule: 11 11 15;
+  --rule-alpha: 0.12;
+}
+
+:root.dark {
+  color-scheme: dark;
+  --bg: var(--ink);
+  --fg: var(--paper);
+  --rule: 246 243 236;
+  --rule-alpha: 0.14;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    color-scheme: dark;
+    --bg: var(--ink);
+    --fg: var(--paper);
+    --rule: 246 243 236;
+    --rule-alpha: 0.14;
+  }
+}
