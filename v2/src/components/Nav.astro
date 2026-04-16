@@ -10,31 +10,92 @@ const links = [
 ];
 ---
 
-<header class="sticky top-0 z-40 border-b border-rule/0 bg-bg/80 backdrop-blur-md transition-colors" data-nav>
+<header
+  data-nav
+  class="sticky top-0 z-40 border-b border-rule/0 bg-bg/75 backdrop-blur-md transition-[border-color,background-color] duration-300"
+>
   <div class="shell flex h-16 items-center justify-between gap-6">
-    <a href="/" class="font-mono text-sm tracking-tight" aria-label={`${site.name} home`}>
+    <a href="/" class="mono text-sm tracking-tight" aria-label={`${site.name} home`} data-cursor="link">
       <span class="signal-dot"></span>mothilal<span class="muted">.xyz</span>
     </a>
+
     <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
       {
         links.map((link) => (
           <a
             href={link.href}
-            class="text-sm tracking-tight transition-opacity hover:opacity-70"
+            class="nav-link mono relative text-sm tracking-tight transition-opacity hover:opacity-100"
+            data-cursor="link"
           >
             {link.label}
           </a>
         ))
       }
     </nav>
-    <div class="flex items-center gap-3">
+
+    <div class="flex items-center gap-2">
       <ThemeToggle />
+      <button
+        type="button"
+        data-nav-toggle
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="nav-panel"
+        class="flex h-9 w-9 items-center justify-center rounded-full border border-rule/40 transition-colors hover:border-signal hover:text-signal md:hidden"
+        data-cursor="link"
+      >
+        <span class="sr-only">Menu</span>
+        <svg aria-hidden="true" viewBox="0 0 20 20" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M3 6h14M3 14h14" stroke-linecap="round" />
+        </svg>
+      </button>
     </div>
+  </div>
+
+  {/* Mobile panel */}
+  <div
+    id="nav-panel"
+    data-nav-panel
+    hidden
+    class="border-t border-rule/40 bg-bg/95 backdrop-blur-md md:hidden"
+  >
+    <nav class="shell flex flex-col gap-1 py-4" aria-label="Mobile primary">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="mono py-3 text-base tracking-tight hover:text-signal"
+            data-cursor="link"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
   </div>
 </header>
 
+<style>
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 1px;
+    background: rgb(var(--signal));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+</style>
+
 <script>
-  // Add hairline rule to nav when scrolled.
+  // Hairline rule on scroll
   const nav = document.querySelector<HTMLElement>('[data-nav]');
   if (nav) {
     const update = () => {
@@ -42,5 +103,26 @@ const links = [
     };
     update();
     window.addEventListener('scroll', update, { passive: true });
+  }
+
+  // Mobile nav toggle
+  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const panel = document.querySelector<HTMLElement>('[data-nav-panel]');
+  if (toggle && panel) {
+    const set = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      if (open) {
+        panel.hidden = false;
+      } else {
+        panel.hidden = true;
+      }
+    };
+    toggle.addEventListener('click', () => {
+      set(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+    panel.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) set(false);
+    });
   }
 </script>

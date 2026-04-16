@@ -89,4 +89,105 @@
     vertical-align: middle;
     box-shadow: 0 0 12px rgb(var(--signal) / 0.6);
   }
+
+  /* Focus ring — signal color, always visible when keyboard-nav. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--signal));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Magnetic-hover base — JS moves transform, CSS eases it back on leave. */
+  .magnetic {
+    transition:
+      transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 220ms ease,
+      color 220ms ease,
+      background-color 220ms ease;
+    will-change: transform;
+  }
+}
+
+@layer utilities {
+  /* ───── Custom cursor ───── */
+  .cursor-dot,
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    will-change: transform, opacity;
+  }
+
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 9999px;
+    background: rgb(var(--signal));
+  }
+
+  .cursor-ring {
+    width: 28px;
+    height: 28px;
+    margin: -14px 0 0 -14px;
+    border: 1px solid rgb(var(--paper) / 0.55);
+    border-radius: 9999px;
+    transition:
+      width 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      height 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      margin 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 240ms ease,
+      background-color 240ms ease,
+      opacity 200ms ease;
+  }
+
+  .cursor-ring[data-mode='link'] {
+    width: 56px;
+    height: 56px;
+    margin: -28px 0 0 -28px;
+    border-color: rgb(var(--signal) / 0.95);
+    background: rgb(var(--signal) / 0.06);
+  }
+
+  .cursor-ring[data-mode='copy']::after {
+    content: 'copy';
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font: 500 10px/1 'JetBrains Mono Variable', monospace;
+    color: rgb(var(--signal));
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+
+  @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .cursor-dot,
+    .cursor-ring {
+      display: none !important;
+    }
+  }
+
+  /* Disable Lenis on reduced motion — class toggled in Base.astro inline script. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  html.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  html.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  html.lenis.lenis-stopped body {
+    overflow: hidden;
+  }
 }

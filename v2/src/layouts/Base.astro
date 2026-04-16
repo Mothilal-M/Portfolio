@@ -167,5 +167,38 @@ const canonicalUrl = new URL(canonical, site.url).toString();
       Skip to content
     </a>
     <slot />
+
+    <script>
+      // Global smooth scroll via Lenis. Disabled for reduced-motion.
+      import Lenis from 'lenis';
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce) {
+        const lenis = new Lenis({
+          duration: 1.1,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          touchMultiplier: 1.2,
+        });
+
+        const raf = (time: number) => {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        };
+        requestAnimationFrame(raf);
+
+        // Hash-links (#about, #work…) need manual scrollTo for Lenis.
+        document.addEventListener('click', (e) => {
+          const target = (e.target as HTMLElement)?.closest<HTMLAnchorElement>('a[href^="#"]');
+          if (!target) return;
+          const hash = target.getAttribute('href');
+          if (!hash || hash === '#') return;
+          const el = document.querySelector(hash);
+          if (!el) return;
+          e.preventDefault();
+          lenis.scrollTo(el as HTMLElement, { offset: -72 });
+        });
+      }
+    </script>
   </body>
 </html>
