@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+@theme {
+  /*
+   * Single-accent design: swap --color-accent (and -soft) to retheme
+   * the whole site. Alternative accent: electric tangerine #FF5C1A.
+   */
+  --color-base: #0f0e0c;
+  --color-surface: #171511;
+  --color-surface-2: #201d18;
+  --color-border: #2b2722;
+  --color-text: #f2efe8;
+  --color-muted: #a39d92;
+  --color-accent: #d6ff3f;
+  --color-accent-soft: rgb(214 255 63 / 12%);
+  --color-accent-ink: #0f0e0c;
+
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-instrument);
+  --font-mono: var(--font-jetbrains);
+
+  --text-display: clamp(3.5rem, 14.5vw, 15rem);
+  --text-mega: clamp(3rem, 12vw, 12rem);
+  --text-h2: clamp(2.25rem, 5.5vw, 5rem);
+  --text-h3: clamp(1.375rem, 2.5vw, 2rem);
+
+  --spacing-section: clamp(6rem, 12vh, 10rem);
+
+  --radius-card: 1.25rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Lenis owns scrolling when active; avoid double-smoothing */
+html.lenis {
+  scroll-behavior: auto;
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  background: var(--color-base);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* SplitText line masks */
+.split-line-mask {
+  overflow: hidden;
+}
+
+/* Outlined display type (hero second line, watermarks, big CTA) */
+.text-outline {
+  -webkit-text-stroke: 1.5px var(--color-muted);
+  color: transparent;
+}
+.text-outline-accent {
+  -webkit-text-stroke: 1.5px var(--color-accent);
+  color: transparent;
+}
+.text-outline-faint {
+  -webkit-text-stroke: 1px var(--color-border);
+  color: transparent;
+}
+
+/* Giant contact CTA: outline that floods with lime on hover */
+.cta-flood {
+  -webkit-text-stroke: 1.5px var(--color-accent);
+  color: transparent;
+  transition: color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cta-flood:hover,
+.cta-flood:focus-visible {
+  color: var(--color-accent);
+}
+
+/* Sliding underline for inline links */
+.link-underline {
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* Hide native cursor only while the custom cursor is mounted (fine pointers) */
+body[data-custom-cursor="true"] {
+  cursor: none;
+}
+body[data-custom-cursor="true"] a,
+body[data-custom-cursor="true"] button {
+  cursor: none;
+}
+
+/* Preloader is gated behind JS so no-JS visitors never get stuck under it */
+.preloader {
+  display: none;
+  clip-path: inset(0 0 0% 0);
+}
+.js .preloader {
+  display: flex;
+}
+.js.skip-preloader .preloader {
+  display: none;
+}
+
+/* Timeline node lit state (toggled by ScrollTrigger) */
+.node-active {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  box-shadow: 0 0 12px rgb(214 255 63 / 50%);
+  transition: all 0.4s ease;
+}
+
+/* Animated film grain */
+@keyframes grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, -35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .grain {
+    animation: grain-shift 8s steps(10) infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
