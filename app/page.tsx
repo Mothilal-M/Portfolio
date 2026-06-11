@@ -1,9 +1,16 @@
 import { allSchemas } from "@/lib/jsonld";
-import { person } from "@/lib/content";
+import { Navbar } from "@/components/ui/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { About } from "@/components/sections/About";
+import { Skills } from "@/components/sections/Skills";
+import { Experience } from "@/components/sections/Experience";
+import { Projects } from "@/components/sections/Projects";
+import { Contact } from "@/components/sections/Contact";
+import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <main id="main" className="flex-1">
+    <>
       {allSchemas().map((schema, i) => (
         <script
           key={i}
@@ -11,11 +18,17 @@ export default function Home() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
-      <section className="flex min-h-screen items-center justify-center">
-        <h1 className="font-display text-display leading-none tracking-tight">
-          {person.name}
-        </h1>
-      </section>
-    </main>
+
+      <Navbar />
+      <main id="main" className="flex-1">
+        <Hero />
+        <About />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 }

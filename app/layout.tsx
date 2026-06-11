@@ -65,6 +65,12 @@ export default function RootLayout({
       className={`${bricolage.variable} ${instrument.variable} ${jetbrains.variable} antialiased`}
     >
       <body className="min-h-screen flex flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-5 focus:py-2.5 focus:font-mono focus:text-xs focus:text-accent-ink"
+        >
+          Skip to content
+        </a>
         {children}
         <GoogleAnalytics gaId={site.gaId} />
       </body>
