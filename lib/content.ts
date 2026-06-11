@@ -36,7 +36,15 @@ export const person = {
   portrait: "/images/mothilal.jpg",
 } as const;
 
+/** Ticker strips */
+export const marquee = {
+  hero: ["PYTHON", "FASTAPI", "GCP", "DOCKER", "POSTGRESQL", "REDIS", "CI/CD", "MICROSERVICES"],
+  band: ["RELIABLE APIS", "CLEAN DEPLOYS", "SYSTEMS THAT SCALE", "OPEN TO WORK"],
+} as const;
+
 export const about = {
+  statement:
+    "APIs that don't flake. Deploys that don't drift. Systems that scale without drama.",
   paragraphs: [
     "Currently working as a Software Engineer at 10xscale.ai in Hyderabad, delivering backend features and cloud integrations used in real product workflows. I focus on reducing operational friction, improving API reliability, and building systems that stay maintainable as usage grows.",
     "I specialize in backend development with Python and FastAPI, cloud infrastructure on GCP, and scalable microservices. I prioritize measurable outcomes: faster response times, cleaner deployments, and dependable systems.",

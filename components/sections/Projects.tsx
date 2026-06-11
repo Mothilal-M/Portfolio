@@ -15,10 +15,11 @@ export function Projects() {
         <SectionHeading index="04" eyebrow="Selected work" title="Built to ship, built to last." />
 
         <div className="mt-14 grid gap-4 md:grid-cols-3">
-          {projects.map((project) => (
+          {projects.map((project, i) => (
             <BentoCard
               key={project.slug}
               project={project}
+              index={i}
               className={SIZE_CLASSES[project.size]}
             />
           ))}

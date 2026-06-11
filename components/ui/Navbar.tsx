@@ -53,6 +53,7 @@ export function Navbar() {
               <a
                 href={item.href}
                 data-cursor="hover"
+                data-scramble-hover
                 className="font-mono text-xs uppercase tracking-[0.2em] text-muted transition-colors hover:text-accent"
               >
                 {item.label}

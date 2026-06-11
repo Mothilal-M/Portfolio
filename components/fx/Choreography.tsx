@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { gsap, ScrollTrigger, SplitText, useGSAP } from "@/lib/gsap";
+import { gsap, ScrollTrigger, SplitText, useGSAP, SCRAMBLE_CHARS } from "@/lib/gsap";
 import { onIntro } from "@/lib/intro";
 
 /**
@@ -35,6 +35,8 @@ export function Choreography() {
           type: "chars",
           mask: "chars",
         });
+        const roleEl = document.querySelector('[data-animate="hero-role"]');
+        const roleText = roleEl?.textContent ?? "";
         const intro = gsap
           .timeline({ paused: true })
           .from(nameSplit.chars, {
@@ -44,24 +46,83 @@ export function Choreography() {
             stagger: 0.03,
           })
           .from('[data-animate="hero-badge"]', { autoAlpha: 0, y: 14, duration: 0.5 }, "-=0.55")
-          .from('[data-animate="hero-role"]', { autoAlpha: 0, y: 14, duration: 0.5 }, "-=0.35")
-          .from('[data-animate="hero-bio"]', { autoAlpha: 0, y: 18, duration: 0.55 }, "-=0.35")
-          .from('[data-animate="hero-cta"]', { autoAlpha: 0, y: 18, duration: 0.55 }, "-=0.4")
-          .from('[data-animate="hero-hint"]', { autoAlpha: 0, duration: 0.6 }, "-=0.3");
+          .from('[data-animate="hero-role"]', { autoAlpha: 0, duration: 0.3 }, "-=0.4")
+          .to(
+            '[data-animate="hero-role"]',
+            {
+              duration: 1.1,
+              scrambleText: { text: roleText, chars: SCRAMBLE_CHARS, speed: 0.6 },
+            },
+            "-=0.2",
+          )
+          .from('[data-animate="hero-bio"]', { autoAlpha: 0, y: 18, duration: 0.55 }, "-=0.9")
+          .from('[data-animate="hero-cta"]', { autoAlpha: 0, y: 18, duration: 0.55 }, "-=0.7")
+          .from('[data-animate="hero-hint"]', { autoAlpha: 0, duration: 0.6 }, "-=0.4");
         const offIntro = onIntro(() => intro.play());
 
-        // ---- Hero exit parallax ----
+        // ---- Hero exit: text sinks + dims as the curtain slides over ----
+        // The hero is position:sticky, so use absolute scroll distances
         gsap.to('[data-animate="hero-text"]', {
-          yPercent: -14,
-          autoAlpha: 0.2,
+          yPercent: -10,
+          autoAlpha: 0.15,
+          scale: 0.97,
+          transformOrigin: "center top",
           ease: "none",
           scrollTrigger: {
-            trigger: "#home",
-            start: "top top",
-            end: "bottom 25%",
+            start: 0,
+            end: () => window.innerHeight * 0.9,
             scrub: true,
           },
         });
+
+        // ---- Terminal decode: mono labels scramble in on first view ----
+        gsap.utils.toArray<HTMLElement>("[data-scramble]").forEach((el) => {
+          const text = el.textContent ?? "";
+          ScrollTrigger.create({
+            trigger: el,
+            start: "top 88%",
+            once: true,
+            onEnter: () =>
+              gsap.to(el, {
+                duration: 1,
+                scrambleText: { text, chars: SCRAMBLE_CHARS, speed: 0.7 },
+              }),
+          });
+        });
+
+        // ---- Scramble-on-hover (nav links etc.) ----
+        const hoverEls = gsap.utils.toArray<HTMLElement>("[data-scramble-hover]");
+        hoverEls.forEach((el) => (el.dataset.text = el.textContent ?? ""));
+        const onHover = (e: PointerEvent) => {
+          const el =
+            e.target instanceof Element
+              ? e.target.closest<HTMLElement>("[data-scramble-hover]")
+              : null;
+          if (!el || el.dataset.scrambling) return;
+          el.dataset.scrambling = "1";
+          gsap.to(el, {
+            duration: 0.5,
+            scrambleText: { text: el.dataset.text ?? "", chars: SCRAMBLE_CHARS, speed: 1.2 },
+            onComplete: () => delete el.dataset.scrambling,
+          });
+        };
+        document.addEventListener("pointerover", onHover);
+
+        // ---- Text-fill-on-scroll: About statement brightens word by word ----
+        const fill = document.querySelector<HTMLElement>('[data-animate="fill-text"]');
+        if (fill) {
+          const split = SplitText.create(fill, { type: "words" });
+          gsap.fromTo(
+            split.words,
+            { color: "#3a362e" },
+            {
+              color: "#f2efe8",
+              stagger: 0.04,
+              ease: "none",
+              scrollTrigger: { trigger: fill, start: "top 82%", end: "top 30%", scrub: true },
+            },
+          );
+        }
 
         // ---- Section headings: masked line reveals ----
         gsap.utils.toArray<HTMLElement>('[data-animate="heading"]').forEach((el) => {
@@ -142,6 +203,7 @@ export function Choreography() {
         return () => {
           offIntro();
           nameSplit.revert();
+          document.removeEventListener("pointerover", onHover);
         };
       });
 

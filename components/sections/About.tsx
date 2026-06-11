@@ -26,6 +26,12 @@ export function About() {
 
         <div>
           <SectionHeading index="01" eyebrow="About" title="Systems that stay reliable as they grow." />
+          <p
+            data-animate="fill-text"
+            className="mt-10 max-w-2xl font-display text-h3 leading-snug tracking-tight text-text"
+          >
+            {about.statement}
+          </p>
           <div className="mt-8 space-y-5">
             {about.paragraphs.map((p, i) => (
               <p key={i} data-animate="about-para" className="max-w-2xl leading-relaxed text-muted">

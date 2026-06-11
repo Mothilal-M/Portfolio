@@ -1,5 +1,4 @@
 import { person } from "@/lib/content";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ContactForm } from "@/components/ui/ContactForm";
 
 const channels = [
@@ -13,8 +12,22 @@ export function Contact() {
   return (
     <section id="contact" className="py-section">
       <div className="mx-auto w-full max-w-[90rem] px-6 md:px-12">
-        <SectionHeading index="05" eyebrow="Contact" title="Let's build something." />
-        <p className="mt-6 max-w-xl leading-relaxed text-muted">
+        <p data-scramble className="mb-6 font-mono text-xs uppercase tracking-[0.3em] text-accent">
+          [05] — Contact
+        </p>
+
+        {/* The page's closing statement: outline floods lime on hover */}
+        <a
+          href={`mailto:${person.email}`}
+          data-cursor="hover"
+          data-animate="heading"
+          className="cta-flood block font-display text-mega font-bold uppercase leading-[0.9] tracking-tight"
+        >
+          Let&apos;s talk
+          <span aria-hidden className="align-top text-[0.5em]"> ↗</span>
+        </a>
+
+        <p className="mt-8 max-w-xl leading-relaxed text-muted">
           Open to backend and platform engineering roles, freelance projects, and interesting
           product ideas. The fastest way to reach me is email — I reply within a day.
         </p>

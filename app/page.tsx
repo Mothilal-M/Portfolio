@@ -8,6 +8,7 @@ import { Projects } from "@/components/sections/Projects";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 import { Choreography } from "@/components/fx/Choreography";
+import { AccentBand } from "@/components/ui/AccentBand";
 
 export default function Home() {
   return (
@@ -23,13 +24,17 @@ export default function Home() {
       <Navbar />
       <main id="main" className="flex-1">
         <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Contact />
+        {/* Curtain stack: slides over the sticky hero */}
+        <div className="relative z-10 rounded-t-[2rem] border-t border-border bg-base shadow-[0_-24px_80px_rgb(0_0_0/0.7)] md:rounded-t-[3rem]">
+          <About />
+          <Skills />
+          <AccentBand />
+          <Experience />
+          <Projects />
+          <Contact />
+          <Footer />
+        </div>
       </main>
-      <Footer />
       <Choreography />
     </>
   );

@@ -6,7 +6,15 @@ import type { Project } from "@/lib/content";
 
 const FIELD_LABELS = ["Problem", "Role", "Outcome"] as const;
 
-export function BentoCard({ project, className }: { project: Project; className?: string }) {
+export function BentoCard({
+  project,
+  index,
+  className,
+}: {
+  project: Project;
+  index: number;
+  className?: string;
+}) {
   const ref = useRef<HTMLElement>(null);
 
   const onPointerMove = (e: React.PointerEvent) => {
@@ -40,6 +48,14 @@ export function BentoCard({ project, className }: { project: Project; className?
             "radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), var(--color-accent-soft), transparent 70%)",
         }}
       />
+
+      {/* Giant index — outlined, fills lime on card hover */}
+      <span
+        aria-hidden
+        className="text-outline-faint pointer-events-none absolute -top-4 right-4 select-none font-display text-[6rem] font-bold leading-none transition-all duration-500 group-hover:[-webkit-text-stroke-color:var(--color-accent)] md:text-[8rem]"
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
 
       <div className="relative flex flex-1 flex-col">
         <div className="mb-6 flex flex-wrap gap-2">

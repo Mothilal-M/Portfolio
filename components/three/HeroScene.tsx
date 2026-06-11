@@ -19,14 +19,12 @@ export default function HeroScene() {
   const [inView, setInView] = useState(true);
 
   useEffect(() => {
-    const el = wrapRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    // The hero is sticky, so it never leaves the viewport — pause the
+    // frameloop once the curtain content has fully covered it instead.
+    const onScroll = () => setInView(window.scrollY < window.innerHeight * 1.15);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const particleCount = isMobile ? 1200 : degraded ? 1600 : 3000;

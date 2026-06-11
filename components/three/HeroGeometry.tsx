@@ -17,7 +17,8 @@ export function HeroGeometry({ isMobile }: { isMobile: boolean }) {
   });
 
   return (
-    <group ref={group}>
+    // Right-of-center so the type lockup intersects the geometry's edge
+    <group ref={group} position={[isMobile ? 0 : 1.6, 0.2, 0]} scale={isMobile ? 0.9 : 1.15}>
       <Float speed={1.4} rotationIntensity={0.5} floatIntensity={0.7}>
         {/* Outer wireframe shell */}
         <mesh scale={1.95}>
