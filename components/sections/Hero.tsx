@@ -1,6 +1,6 @@
 import { person } from "@/lib/content";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { SceneFallback } from "@/components/three/SceneFallback";
+import { HeroSceneLoader } from "@/components/three/HeroSceneLoader";
 
 export function Hero() {
   return (
@@ -10,7 +10,7 @@ export function Hero() {
         aria-hidden
         className="absolute inset-0 opacity-50 md:left-[35%] md:opacity-100"
       >
-        <SceneFallback />
+        <HeroSceneLoader />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[90rem] px-6 pt-28 pb-20 md:px-12">
