@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { useMediaQuery, useReducedMotion } from "@/lib/hooks/useMediaQuery";
 
 /**
  * Accent dot + trailing ring. Mounted only for fine pointers without
@@ -10,13 +11,9 @@ import { gsap, useGSAP } from "@/lib/gsap";
 export function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    const fine = window.matchMedia("(pointer: fine)").matches;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setActive(fine && !reduced);
-  }, []);
+  const fine = useMediaQuery("(pointer: fine)");
+  const reduced = useReducedMotion();
+  const active = fine && !reduced;
 
   useEffect(() => {
     if (!active) return;

@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      // Old OG/profile image URL still referenced by social caches
+      {
+        source: "/mothilal.png",
+        destination: "/images/mothilal.jpg",
+        permanent: true,
+      },
     ];
   },
 };

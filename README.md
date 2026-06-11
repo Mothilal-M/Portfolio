@@ -1,42 +1,41 @@
-# Mothilal Portfolio
+# mothilal.xyz
 
-Production portfolio website for **Mothilal M** (Software Engineer, Python/FastAPI backend developer).
+Animated 3D portfolio for **Mothilal M** — Software Engineer (Python · FastAPI · GCP) at 10xscale.ai.
 
-## Live Site
-- Primary portfolio: https://mothilal.xyz/
-- Animated demo: https://mothilal.xyz/animated-portfolio.html
+Live: https://mothilal.xyz
 
-## Repository Structure
-- `index.html` — primary portfolio (canonical experience)
-- `animated-portfolio.html` — animated demo experience
-- `sitemap.xml` — sitemap entries for public pages
-- `robots.txt` — crawl directives
-- `deployment.yaml` — optional Kubernetes deployment scaffold
+## Stack
 
-## Local Development
-This project is static HTML/CSS/JS and does not require a build step.
+- **Next.js 16** (App Router, React 19, TypeScript)
+- **React Three Fiber + drei** — interactive hero scene (particle field with cursor repulsion, distorted icosahedron)
+- **GSAP** (ScrollTrigger, SplitText) + **Lenis** — scroll choreography, pinned skills deck, masked text reveals
+- **Tailwind CSS v4** — design tokens in `app/globals.css` `@theme`
 
-1. Open the repo directory:
-   ```bash
-   cd /home/runner/work/Portfolio/Portfolio
-   ```
-2. Start a local server:
-   ```bash
-   python -m http.server 8000
-   ```
-3. Visit: `http://localhost:8000`
+## Editing content
 
-## Contact Form Behavior
-- The contact form in `index.html` posts to `https://formsubmit.co/ajax/mothilal044@gmail.com`.
-- If endpoint delivery fails, it falls back to `mailto:` so inquiries are still captured.
-- reCAPTCHA token generation is included and can be validated server-side if a verification endpoint is deployed.
+All copy and data live in [`lib/content.ts`](lib/content.ts) — projects, skills, experience, contact channels, SEO strings. Edit there; the components are presentation only. Structured data (JSON-LD) is generated from the same file via [`lib/jsonld.ts`](lib/jsonld.ts).
 
-## Deployment Notes
-- Designed for static hosting (GitHub Pages / Netlify / Vercel / CDN static host).
-- `CNAME` is configured for `mothilal.xyz`.
-- If Kubernetes is used, complete `deployment.yaml` with ConfigMap/Service/Ingress resources before production use.
+To retheme, swap `--color-accent` in [`app/globals.css`](app/globals.css) — the whole site follows the single accent token.
 
-## Author
-- Mothilal M
-- LinkedIn: https://www.linkedin.com/in/mothilal-m-04803a227
-- GitHub: https://github.com/mothilal
+## Development
+
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm run lint
+```
+
+## Architecture notes
+
+- The R3F canvas is dynamic-imported with `ssr: false` — three.js stays out of the initial bundle; WebGL-less and reduced-motion visitors get a static fallback.
+- Lenis is driven by the GSAP ticker (`SmoothScroll` provider) so ScrollTrigger stays in sync.
+- All motion lives inside `gsap.matchMedia` — `prefers-reduced-motion` users get static content with native scroll.
+- The preloader is gated behind a `.js` html class set by an inline script, so no-JS visitors never see it; it plays once per session.
+- The contact form posts to FormSubmit (`lib/content.ts` → `site.formEndpoint`) with a honeypot field.
+
+## Deployment
+
+Deployed on Vercel; the `mothilal.xyz` apex and `www` point at Vercel DNS. Legacy GitHub Pages URLs (`/index.html`, `/animated-portfolio.html`, `/mothilal.png`) 301 to their new homes via `next.config.ts`.
+
+The old static site is preserved under [`legacy/`](legacy/) until the cutover is verified, then it can be deleted.

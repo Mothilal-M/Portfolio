@@ -33,7 +33,7 @@ export const person = {
     github: "https://github.com/Mothilal-M",
     site: "https://mothilal.xyz",
   },
-  portrait: "/images/mothilal.png",
+  portrait: "/images/mothilal.jpg",
 } as const;
 
 export const about = {

@@ -25,8 +25,12 @@ export function HeroSceneLoader() {
   const [mode, setMode] = useState<Mode>("pending");
 
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setMode(!reduced && supportsWebGL() ? "scene" : "fallback");
+    // Deferred a frame: avoids a synchronous cascading render during commit
+    const id = requestAnimationFrame(() => {
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      setMode(!reduced && supportsWebGL() ? "scene" : "fallback");
+    });
+    return () => cancelAnimationFrame(id);
   }, []);
 
   if (mode !== "scene") return <SceneFallback />;

@@ -1,6 +1,6 @@
 {
-  "name": "portfolio-next-tmp",
-  "version": "0.1.0",
+  "name": "mothilal-portfolio",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

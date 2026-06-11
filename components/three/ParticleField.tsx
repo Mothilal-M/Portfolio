@@ -13,6 +13,17 @@ interface ParticleFieldProps {
 const REPULSION_RADIUS = 1.5;
 const HEAL = 0.06; // how fast displaced points ease back to their base position
 
+// Seeded PRNG (mulberry32) — pure across renders, same cloud every visit
+function mulberry32(seed: number) {
+  return () => {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
 export function ParticleField({ count, interactive }: ParticleFieldProps) {
   const pointsRef = useRef<THREE.Points>(null);
   const pointerWorld = useRef(new THREE.Vector3());
@@ -20,11 +31,12 @@ export function ParticleField({ count, interactive }: ParticleFieldProps) {
 
   // Loose spherical shell around the hero geometry
   const base = useMemo(() => {
+    const rand = mulberry32(0x10f5ca1e);
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      const r = 2.4 + Math.random() * 1.9;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 2.4 + rand() * 1.9;
+      const theta = rand() * Math.PI * 2;
+      const phi = Math.acos(2 * rand() - 1);
       arr[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       arr[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       arr[i * 3 + 2] = r * Math.cos(phi);

@@ -24,7 +24,7 @@ export function personSchema() {
     description:
       "Mothilal M is a Software Engineer specializing in Python, FastAPI, backend development, and cloud infrastructure. Currently working at 10xscale.ai building scalable systems.",
     url: `${site.url}/`,
-    image: { "@type": "ImageObject", url: IMAGE_URL, width: 1200, height: 630 },
+    image: { "@type": "ImageObject", url: IMAGE_URL, width: 800, height: 772 },
     email: `mailto:${person.email}`,
     telephone: "+91-9787962328",
     address: {
