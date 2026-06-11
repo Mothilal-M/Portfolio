@@ -1,26 +1,81 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /*
+   * Single-accent design: swap --color-accent (and -soft) to retheme
+   * the whole site. Alternative accent: electric tangerine #FF5C1A.
+   */
+  --color-base: #0f0e0c;
+  --color-surface: #171511;
+  --color-surface-2: #201d18;
+  --color-border: #2b2722;
+  --color-text: #f2efe8;
+  --color-muted: #a39d92;
+  --color-accent: #d6ff3f;
+  --color-accent-soft: rgb(214 255 63 / 12%);
+  --color-accent-ink: #0f0e0c;
+
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-instrument);
+  --font-mono: var(--font-jetbrains);
+
+  --text-display: clamp(3.5rem, 9vw, 9rem);
+  --text-h2: clamp(2rem, 4.5vw, 4rem);
+  --text-h3: clamp(1.375rem, 2.5vw, 2rem);
+
+  --spacing-section: clamp(6rem, 12vh, 10rem);
+
+  --radius-card: 1.25rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Lenis owns scrolling when active; avoid double-smoothing */
+html.lenis {
+  scroll-behavior: auto;
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-base);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* SplitText line masks */
+.split-line-mask {
+  overflow: hidden;
+}
+
+/* Hide native cursor only while the custom cursor is mounted (fine pointers) */
+body[data-custom-cursor="true"] {
+  cursor: none;
+}
+body[data-custom-cursor="true"] a,
+body[data-custom-cursor="true"] button {
+  cursor: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
