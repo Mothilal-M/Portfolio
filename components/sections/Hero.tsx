@@ -13,7 +13,10 @@ export function Hero() {
         <HeroSceneLoader />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[90rem] px-6 pt-28 pb-20 md:px-12">
+      <div
+        data-animate="hero-text"
+        className="relative z-10 mx-auto w-full max-w-[90rem] px-6 pt-28 pb-20 md:px-12"
+      >
         <p
           data-animate="hero-badge"
           className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border bg-surface/80 px-4 py-2 font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-muted backdrop-blur-sm"
