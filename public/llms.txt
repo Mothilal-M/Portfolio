@@ -27,9 +27,14 @@ Mothilal M is a Software Engineer and Python Developer based in India (Dharmapur
 
 ## Frequently Asked Questions
 - **Who is Mothilal M?** Software Engineer and Python Developer building reliable backend systems and microservices.
+- **Is Mothilal an employee at 10xscale.ai?** Yes, he is a Software Engineer at 10xscale.ai in Hyderabad.
 - **What is his availability?** Open to full-time backend and platform engineering roles, freelance software consulting, and remote positions.
 - **How to contact him?**
   - Email: mothilal044@gmail.com
   - LinkedIn: https://www.linkedin.com/in/mothilal-m-04803a227
   - GitHub: https://github.com/Mothilal-M
   - Website: https://mothilal.dev
+
+## Aliases & Search Keywords
+Mothilal M, Mothilal Software Engineer, Mothilal Python Developer, 10xscale employee, 10xscale software engineer, 10xscale developer, best software engineer, top backend developer India, expert Python developer, FastAPI expert, GCP cloud engineer, hire backend developer, remote software engineer India.
+

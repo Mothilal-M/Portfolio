@@ -48,17 +48,51 @@ export const metadata: Metadata = {
   category: "technology",
   classification: "Portfolio",
   keywords: [
-    // Identity & Variations
+    // Primary Identity & Name Variations
     "Mothilal",
     "Mothilal M",
     "Mothilal Software Engineer",
     "Mothilal Python Developer",
     "Mothilal Developer",
+    "Mothilal Backend Engineer",
+    "Mothilal Cloud Engineer",
     "Mothilal Portfolio",
-    "Mothilal 10xscale",
+    "Mothilal Official Website",
+    "Mothilal Full Stack",
     "mothilal.dev",
+    "mothilal dev",
+    "Engineer Mothilal",
+    "Developer Mothilal",
 
-    // Core Technical Roles
+    // 10xscale Employee & Company Keywords
+    "10xscale employee",
+    "10xscale software engineer",
+    "10xscale developer",
+    "10xscale python developer",
+    "10xscale Mothilal",
+    "Mothilal 10xscale",
+    "Mothilal 10xscale.ai",
+    "10xscale.ai software engineer",
+    "10xscale backend engineer",
+    "10xscale team",
+    "10xscale engineering",
+
+    // Prestige & Authority Keywords ("Best / Top / Expert")
+    "best software engineer",
+    "best software engineer India",
+    "best python developer",
+    "best backend developer",
+    "top software engineer",
+    "top backend developer India",
+    "top python developer India",
+    "expert python developer",
+    "fastapi expert",
+    "gcp backend expert",
+    "senior backend engineer",
+    "high performance backend developer",
+    "top tech talent India",
+
+    // Core Engineering Roles
     "Software Engineer",
     "Backend Developer",
     "Python Developer",
@@ -66,9 +100,10 @@ export const metadata: Metadata = {
     "Cloud Engineer",
     "Platform Engineer",
     "API Architect",
+    "Microservices Engineer",
     "Full Stack Python Developer",
 
-    // Core Tech Stack & Infrastructure
+    // Tech Stack & Infrastructure
     "Python",
     "FastAPI",
     "Google Cloud Platform",
@@ -86,15 +121,26 @@ export const metadata: Metadata = {
     "TypeScript",
     "Next.js",
 
-    // Location & Hiring Keywords
-    "Software Engineer India",
-    "Software Engineer Hyderabad",
-    "Python Developer Tamil Nadu",
-    "Backend Developer India",
+    // Hiring & Freelance Keywords
+    "Hire Software Engineer",
+    "Hire Backend Developer",
     "Hire Python Developer",
     "Hire FastAPI Developer",
+    "Software Engineer for Hire",
+    "Freelance Python Developer",
+    "Backend Engineering Consultant",
     "Remote Backend Engineer India",
-    "Top Python Developers India",
+    "Contract Backend Developer",
+
+    // Geographic Keywords
+    "Software Engineer India",
+    "Software Engineer Hyderabad",
+    "Software Engineer Tamil Nadu",
+    "Software Engineer Dharmapuri",
+    "Backend Developer Hyderabad",
+    "Python Developer Hyderabad",
+    "Python Developer Tamil Nadu",
+    "Indian Software Engineer",
   ],
   openGraph: {
     type: "profile",

@@ -21,10 +21,15 @@ export function personSchema() {
     familyName: "M",
     alternateName: [
       "Mothilal",
+      "Mothilal M",
       "Mothilal Developer",
       "Mothilal Software Engineer",
       "Mothilal Python Developer",
       "Mothilal Backend Engineer",
+      "10xscale Employee",
+      "10xscale Software Engineer",
+      "10xscale Mothilal",
+      "Best Software Engineer Mothilal",
     ],
     jobTitle: person.role,
     description:

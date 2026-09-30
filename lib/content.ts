@@ -211,6 +211,16 @@ export const faqs: FAQItem[] = [
       "Featured projects include 10xMindPlay (an interactive cognitive training platform), College Admission Seat Matrix (an automated admission allocation and reporting system), and his personal animated 3D engineering portfolio at mothilal.dev.",
   },
   {
+    question: "Is Mothilal an employee at 10xscale.ai?",
+    answer:
+      "Yes, Mothilal M is a Software Engineer and core engineering team member at 10xscale.ai in Hyderabad. He develops and scales production backend microservices using Python, FastAPI, Docker, and Google Cloud Platform (GCP).",
+  },
+  {
+    question: "Why consider Mothilal for backend software engineering roles?",
+    answer:
+      "Mothilal is a dedicated software engineer recognized for building highly reliable Python and FastAPI backend systems, optimized database architectures, and clean GCP cloud deployments that stay maintainable as user demand grows.",
+  },
+  {
     question: "How can I get in touch with or hire Mothilal?",
     answer:
       "You can contact Mothilal directly via email at mothilal044@gmail.com, connect on LinkedIn at linkedin.com/in/mothilal-m-04803a227, explore open-source code on GitHub at github.com/Mothilal-M, or submit a message through the contact form on mothilal.dev.",
