@@ -48,7 +48,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-[0.6875rem] tracking-wider text-muted">
-            © 2024–2026 mothilal.xyz · {person.role} based in Tamil Nadu, India
+            © 2024–2026 mothilal.dev · {person.role} based in Tamil Nadu, India
           </p>
           <a
             href="#home"

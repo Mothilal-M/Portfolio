@@ -56,7 +56,22 @@ export const metadata: Metadata = {
     title: site.title,
     description: site.description,
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    other: {
+      "msvalidate.01": "9F2259B03F5318EEEC2602EE64499BAF",
+    },
+  },
 };
 
 export const viewport: Viewport = {

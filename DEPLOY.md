@@ -1,4 +1,4 @@
-# Deploying mothilal.xyz to Vercel
+# Deploying mothilal.dev to Vercel
 
 These steps need your Vercel account and your domain registrar — do them in order. The site is fully QA-able before any DNS change, so there is zero downtime.
 
@@ -28,18 +28,18 @@ git push -u origin rebuild/next16
 
 ## 4. DNS cutover (at your registrar)
 
-1. Vercel project → **Settings → Domains** → add `mothilal.xyz` and `www.mothilal.xyz` (set www → redirect to apex). Vercel shows the exact records — use those values; the current standard is:
+1. Vercel project → **Settings → Domains** → add `mothilal.dev` and `www.mothilal.dev` (set www → redirect to apex). Vercel shows the exact records — use those values; the current standard is:
    - Apex `A` record → `76.76.21.21`
    - `www` `CNAME` → `cname.vercel-dns.com`
-2. **Delete** the four GitHub Pages A records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (and any GitHub `www` CNAME).
-3. ⚠️ **Do NOT touch the `10xmindplay` subdomain record** — `10xmindplay.mothilal.xyz` is a live app on its own CNAME.
+2. **Delete** any obsolete GitHub Pages A records.
+3. ⚠️ **Do NOT touch the `10xmindplay` subdomain record** — `10xmindplay.mothilal.dev` is on its own DNS record.
 4. Wait for propagation (check [dnschecker.org](https://dnschecker.org)); Vercel auto-issues TLS once the record resolves.
 
 ## 5. After cutover
 
 - [ ] GitHub repo → Settings → Pages → set Source to **None** (disable GitHub Pages)
-- [ ] `curl -I https://mothilal.xyz/animated-portfolio.html` → 308/301 to `/`
-- [ ] Google Search Console: property should still verify (DNS TXT survives; if it was verified via HTML file, re-verify by DNS TXT) → submit `https://mothilal.xyz/sitemap.xml` → request re-crawl of `/`
+- [ ] `curl -I https://mothilal.dev/animated-portfolio.html` → 308/301 to `/`
+- [ ] Google Search Console: property should verify → submit `https://mothilal.dev/sitemap.xml` → request re-crawl of `/`
 - [ ] Delete the `legacy/` folder and this checklist's step is done:
 
 ```bash

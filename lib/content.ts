@@ -4,10 +4,10 @@
  */
 
 export const site = {
-  url: "https://mothilal.xyz",
+  url: "https://mothilal.dev",
   title: "Mothilal | Software Engineer & Python Developer | Backend Expert",
   description:
-    "Mothilal M is a Software Engineer and Python Developer at 10xscale.ai specializing in backend development (Python, FastAPI), cloud infrastructure (GCP), Docker, and scalable microservices.",
+    "Mothilal M is a Software Engineer and Python Developer specializing in backend development, FastAPI, GCP cloud infrastructure, and scalable microservices.",
   gaId: "G-Y3T1PYW4SY",
   formEndpoint: "https://formsubmit.co/ajax/mothilal044@gmail.com",
   // Legacy reCAPTCHA Enterprise site key (unused — old site posted to a
@@ -31,7 +31,7 @@ export const person = {
   links: {
     linkedin: "https://www.linkedin.com/in/mothilal-m-04803a227",
     github: "https://github.com/Mothilal-M",
-    site: "https://mothilal.xyz",
+    site: "https://mothilal.dev",
   },
   portrait: "/images/mothilal.jpg",
 } as const;
@@ -159,7 +159,7 @@ export const projects: Project[] = [
     role: "Contributed to product engineering and interaction-focused frontend workflows.",
     outcome: "Launched a live interactive platform with structured cognitive challenges.",
     tags: ["AI", "TypeScript", "Web App", "Modern UI"],
-    links: { live: "https://10xmindplay.mothilal.xyz/" },
+    links: { live: "https://10xmindplay.mothilal.dev/" },
     size: "lg",
   },
   {
@@ -179,7 +179,7 @@ export const projects: Project[] = [
     role: "Designed and built the full UX, content, and implementation — you're looking at it.",
     outcome: "An animated 3D portfolio built with Next.js, React Three Fiber, and GSAP.",
     tags: ["Next.js", "React Three Fiber", "GSAP", "Tailwind"],
-    links: { live: "https://mothilal.xyz", repo: "https://github.com/Mothilal-M/Portfolio" },
+    links: { live: "https://mothilal.dev", repo: "https://github.com/Mothilal-M/Portfolio" },
     size: "wide",
   },
 ];

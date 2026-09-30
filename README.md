@@ -1,8 +1,8 @@
-# mothilal.xyz
+# mothilal.dev
 
 Animated 3D portfolio for **Mothilal M** — Software Engineer (Python · FastAPI · GCP) at 10xscale.ai.
 
-Live: https://mothilal.xyz
+Live: https://mothilal.dev
 
 ## Stack
 
@@ -36,6 +36,6 @@ npm run lint
 
 ## Deployment
 
-Deployed on Vercel; the `mothilal.xyz` apex and `www` point at Vercel DNS. Legacy GitHub Pages URLs (`/index.html`, `/animated-portfolio.html`, `/mothilal.png`) 301 to their new homes via `next.config.ts`.
+Deployed on Vercel; the `mothilal.dev` apex and `www` point at Vercel DNS. Legacy GitHub Pages URLs (`/index.html`, `/animated-portfolio.html`, `/mothilal.png`) 301 to their new homes via `next.config.ts`.
 
 The old static site is preserved under [`legacy/`](legacy/) until the cutover is verified, then it can be deleted.
