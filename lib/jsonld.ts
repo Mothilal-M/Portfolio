@@ -1,9 +1,9 @@
-import { person, site } from "./content";
+import { faqs, person, projects, site } from "./content";
 
 /**
- * Structured-data builders recreating the legacy site's JSON-LD graph
+ * Structured-data builders recreating and expanding the JSON-LD graph
  * (Person, WebSite, ProfilePage, BreadcrumbList, Organization,
- * ProfessionalService) fed from lib/content.ts.
+ * ProfessionalService, FAQPage, ItemList / SoftwareApplication) fed from lib/content.ts.
  */
 
 const PERSON_ID = `${site.url}/#person`;
@@ -19,36 +19,86 @@ export function personSchema() {
     name: person.name,
     givenName: "Mothilal",
     familyName: "M",
-    alternateName: ["Mothilal", "Mothilal Developer", "Mothilal Software Engineer"],
+    alternateName: [
+      "Mothilal",
+      "Mothilal Developer",
+      "Mothilal Software Engineer",
+      "Mothilal Python Developer",
+      "Mothilal Backend Engineer",
+    ],
     jobTitle: person.role,
     description:
       "Mothilal M is a Software Engineer specializing in Python, FastAPI, backend development, and cloud infrastructure. Currently working at 10xscale.ai building scalable systems.",
     url: `${site.url}/`,
     image: { "@type": "ImageObject", url: IMAGE_URL, width: 800, height: 772 },
     email: `mailto:${person.email}`,
-    telephone: "+91-9787962328",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Dharmapuri",
-      addressRegion: "Tamil Nadu",
-      addressCountry: "India",
-    },
+    telephone: person.phone,
+    address: [
+      {
+        "@type": "PostalAddress",
+        addressLocality: "Dharmapuri",
+        addressRegion: "Tamil Nadu",
+        addressCountry: "India",
+      },
+      {
+        "@type": "PostalAddress",
+        addressLocality: "Hyderabad",
+        addressRegion: "Telangana",
+        addressCountry: "India",
+      },
+    ],
     alumniOf: {
       "@type": "CollegeOrUniversity",
       name: "Government Arts College, Coimbatore",
       sameAs: "https://gacbe.ac.in/",
     },
-    worksFor: { "@type": "Organization", name: person.company, url: person.companyUrl },
+    worksFor: {
+      "@type": "Organization",
+      name: person.company,
+      url: person.companyUrl,
+    },
     knowsAbout: [
-      "Python", "FastAPI", "Software Engineering", "Backend Development",
-      "Google Cloud Platform", "Docker", "PostgreSQL", "MySQL", "Redis",
-      "API Development", "Microservices", "Cloud Infrastructure", "TypeScript", "JavaScript",
+      "Python (Programming Language)",
+      "FastAPI",
+      "Software Engineering",
+      "Backend Development",
+      "Google Cloud Platform (GCP)",
+      "Cloud Run",
+      "Cloud SQL",
+      "Docker",
+      "PostgreSQL",
+      "MySQL",
+      "Redis",
+      "API Development",
+      "RESTful APIs",
+      "Microservices Architecture",
+      "Cloud Infrastructure",
+      "CI/CD Automation",
+      "Distributed Systems",
+      "System Design",
+      "TypeScript",
+      "JavaScript",
+      "Next.js",
     ],
     hasOccupation: {
       "@type": "Occupation",
       name: person.role,
-      occupationLocation: { "@type": "City", name: person.companyLocation },
-      skills: "Python, FastAPI, GCP, Docker, PostgreSQL, Backend Development",
+      occupationalCategory: "15-1252.00 - Software Developers",
+      occupationLocation: [
+        { "@type": "City", name: person.companyLocation },
+        { "@type": "City", name: "Dharmapuri" },
+      ],
+      skills:
+        "Python, FastAPI, Google Cloud Platform, Docker, PostgreSQL, Microservices, REST APIs, Redis",
+      description:
+        "Designs, builds, and deploys high-availability backend services, APIs, and cloud microservices.",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "professional inquiries",
+      email: person.email,
+      telephone: person.phone,
+      availableLanguage: ["English", "Tamil"],
     },
     sameAs: [person.links.linkedin, `${site.url}/`, person.links.github],
   };
@@ -81,7 +131,7 @@ export function profilePageSchema() {
     mainEntity: { "@id": PERSON_ID },
     inLanguage: "en-US",
     datePublished: "2024-01-01",
-    dateModified: "2026-06-12",
+    dateModified: new Date().toISOString().split("T")[0],
   };
 }
 
@@ -101,6 +151,7 @@ export function breadcrumbSchema() {
     ["About Mothilal", `${site.url}/#about`],
     ["Skills", `${site.url}/#skills`],
     ["Projects", `${site.url}/#work`],
+    ["FAQ", `${site.url}/#faq`],
     ["Contact", `${site.url}/#contact`],
   ];
   return {
@@ -123,7 +174,7 @@ export function professionalServiceSchema() {
     description:
       "Professional software engineering services including Python development, FastAPI backend systems, cloud infrastructure, and microservices architecture",
     url: `${site.url}/`,
-    telephone: "+91-9787962328",
+    telephone: person.phone,
     email: person.email,
     address: {
       "@type": "PostalAddress",
@@ -134,9 +185,51 @@ export function professionalServiceSchema() {
     priceRange: "$$",
     areaServed: "Worldwide",
     serviceType: [
-      "Backend Development", "Python Development", "FastAPI Development",
-      "Cloud Infrastructure", "API Development",
+      "Backend Development",
+      "Python Development",
+      "FastAPI Development",
+      "Cloud Infrastructure",
+      "API Development",
+      "Microservices Architecture",
     ],
+  };
+}
+
+export function faqSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+export function projectsSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Featured Projects by Mothilal",
+    description: "Software engineering projects and applications built by Mothilal M",
+    itemListElement: projects.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "SoftwareApplication",
+        name: p.title,
+        description: `${p.problem} ${p.outcome}`,
+        applicationCategory: "WebApplication",
+        operatingSystem: "All",
+        author: { "@id": PERSON_ID },
+        url: p.links.live || p.links.repo || site.url,
+        keywords: p.tags.join(", "),
+      },
+    })),
   };
 }
 
@@ -148,5 +241,7 @@ export function allSchemas() {
     organizationSchema(),
     breadcrumbSchema(),
     professionalServiceSchema(),
+    faqSchema(),
+    projectsSchema(),
   ];
 }

@@ -10,7 +10,7 @@ export function About() {
           <div className="overflow-hidden rounded-card border border-border">
             <Image
               src={person.portrait}
-              alt={`Portrait of ${person.name}`}
+              alt={`${person.name} — Software Engineer and Python Developer portrait`}
               width={640}
               height={640}
               className="aspect-square w-full object-cover"

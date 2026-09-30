@@ -184,11 +184,45 @@ export const projects: Project[] = [
   },
 ];
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export const faqs: FAQItem[] = [
+  {
+    question: "Who is Mothilal M?",
+    answer:
+      "Mothilal M is a Software Engineer and Python Developer based in India, currently working at 10xscale.ai in Hyderabad. He specializes in scalable backend systems, FastAPI microservices, Google Cloud Platform (GCP), and high-performance database architectures.",
+  },
+  {
+    question: "What technical stack and technologies does Mothilal specialize in?",
+    answer:
+      "Mothilal's core technical expertise includes Python, FastAPI, Google Cloud Platform (Cloud Run, Cloud SQL), Docker containerization, PostgreSQL, MySQL, Redis caching, microservices architecture, RESTful API design, CI/CD automation, and modern TypeScript frontend integrations.",
+  },
+  {
+    question: "Where is Mothilal based and is he available for remote roles?",
+    answer:
+      "Mothilal is based in Dharmapuri (Tamil Nadu) and Hyderabad (Telangana), India. He is actively available for full-time backend and platform engineering roles, freelance consulting, and remote engineering opportunities globally.",
+  },
+  {
+    question: "What major software projects has Mothilal built?",
+    answer:
+      "Featured projects include 10xMindPlay (an interactive cognitive training platform), College Admission Seat Matrix (an automated admission allocation and reporting system), and his personal animated 3D engineering portfolio at mothilal.dev.",
+  },
+  {
+    question: "How can I get in touch with or hire Mothilal?",
+    answer:
+      "You can contact Mothilal directly via email at mothilal044@gmail.com, connect on LinkedIn at linkedin.com/in/mothilal-m-04803a227, explore open-source code on GitHub at github.com/Mothilal-M, or submit a message through the contact form on mothilal.dev.",
+  },
+];
+
 export const nav = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Work", href: "#work" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ] as const;
 

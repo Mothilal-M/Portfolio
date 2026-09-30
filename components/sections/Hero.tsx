@@ -38,6 +38,9 @@ export function Hero() {
             data-animate="hero-name"
             className="font-display text-display font-bold uppercase leading-[0.86] tracking-tight text-text"
           >
+            <span className="sr-only">
+              {`${person.name} — ${person.role} & Python Developer | Backend Expert`}
+            </span>
             <span aria-hidden className="block">
               Mothilal
             </span>

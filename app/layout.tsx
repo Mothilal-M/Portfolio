@@ -35,12 +35,66 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: site.title,
   description: site.description,
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/",
+      "x-default": "/",
+    },
+  },
   authors: [{ name: person.name, url: site.url }],
+  creator: person.name,
+  publisher: person.name,
+  category: "technology",
+  classification: "Portfolio",
   keywords: [
-    "Mothilal", "Mothilal M", "Mothilal software engineer", "Python developer",
-    "FastAPI developer", "backend developer", "GCP developer", "cloud engineer",
-    "software engineer India", "software engineer Hyderabad", "Mothilal portfolio",
+    // Identity & Variations
+    "Mothilal",
+    "Mothilal M",
+    "Mothilal Software Engineer",
+    "Mothilal Python Developer",
+    "Mothilal Developer",
+    "Mothilal Portfolio",
+    "Mothilal 10xscale",
+    "mothilal.dev",
+
+    // Core Technical Roles
+    "Software Engineer",
+    "Backend Developer",
+    "Python Developer",
+    "FastAPI Developer",
+    "Cloud Engineer",
+    "Platform Engineer",
+    "API Architect",
+    "Full Stack Python Developer",
+
+    // Core Tech Stack & Infrastructure
+    "Python",
+    "FastAPI",
+    "Google Cloud Platform",
+    "GCP Cloud Run",
+    "Cloud SQL",
+    "Docker",
+    "PostgreSQL",
+    "MySQL",
+    "Redis",
+    "Microservices Architecture",
+    "REST API Development",
+    "CI/CD Pipelines",
+    "Distributed Systems",
+    "System Design",
+    "TypeScript",
+    "Next.js",
+
+    // Location & Hiring Keywords
+    "Software Engineer India",
+    "Software Engineer Hyderabad",
+    "Python Developer Tamil Nadu",
+    "Backend Developer India",
+    "Hire Python Developer",
+    "Hire FastAPI Developer",
+    "Remote Backend Engineer India",
+    "Top Python Developers India",
   ],
   openGraph: {
     type: "profile",
@@ -72,10 +126,28 @@ export const metadata: Metadata = {
       "msvalidate.01": "9F2259B03F5318EEEC2602EE64499BAF",
     },
   },
+  other: {
+    "geo.region": "IN-TN",
+    "geo.placename": "Dharmapuri, Tamil Nadu, India",
+    "geo.position": "12.1277;78.1579",
+    "ICBM": "12.1277, 78.1579",
+    "DC.title": site.title,
+    "DC.creator": person.name,
+    "DC.description": site.description,
+    "DC.subject":
+      "Software Engineering, Python Developer, FastAPI, Cloud Infrastructure, Backend Architecture",
+    "DC.language": "en",
+    "DC.coverage": "India, Worldwide",
+    "rating": "General",
+    "revisit-after": "7 days",
+  },
 };
 
 export const viewport: Viewport = {
   themeColor: "#0F0E0C",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

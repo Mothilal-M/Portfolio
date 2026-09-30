@@ -13,7 +13,7 @@ export function Contact() {
     <section id="contact" className="py-section">
       <div className="mx-auto w-full max-w-[90rem] px-6 md:px-12">
         <p data-scramble className="mb-6 font-mono text-xs uppercase tracking-[0.3em] text-accent">
-          [05] — Contact
+          [06] — Contact
         </p>
 
         {/* The page's closing statement: outline floods lime on hover */}

@@ -1,0 +1,35 @@
+# Mothilal M — Software Engineer & Python Developer
+
+> Official portfolio & professional profile: https://mothilal.dev
+
+## Summary
+Mothilal M is a Software Engineer and Python Developer based in India (Dharmapuri, Tamil Nadu & Hyderabad, Telangana). He specializes in scalable backend systems, FastAPI microservices, Google Cloud Platform (GCP) infrastructure, Docker containerization, and distributed database architectures.
+
+## Technical Expertise
+- **Programming Languages**: Python, TypeScript, JavaScript, PHP, SQL
+- **Backend Frameworks**: FastAPI, Starlette, Pydantic, Node.js
+- **Cloud & DevOps**: Google Cloud Platform (GCP, Cloud Run, Cloud SQL), Docker, CI/CD pipelines, Linux system administration
+- **Databases & Caching**: PostgreSQL, MySQL, Redis, Database Design & Optimization
+- **Architecture**: Microservices, RESTful API design, Asynchronous Programming, High-Availability Systems
+- **Frontend**: Next.js, React, Tailwind CSS, GSAP, Responsive UI/UX
+
+## Experience
+- **Software Engineer** — 10XScale.ai (Aug 2024 – Present, Hyderabad / Remote)
+  - Designs and deploys backend services and production APIs using Python, FastAPI, Docker, and Google Cloud Platform.
+  - Improves API reliability, response times, deployment consistency, and developer velocity through automation.
+- **B.Sc. Computer Science** — Government Arts College, Coimbatore (2021 – 2024)
+  - Core foundation in data structures, algorithms, system design, and database management.
+
+## Featured Software Projects
+- **10xMindPlay** (https://10xmindplay.mothilal.dev/): Interactive cognitive training web application built with AI, TypeScript, and modern responsive design.
+- **College Admission Seat Matrix**: Automated college seat allocation and reporting management system powered by PHP, MySQL, and JavaScript.
+- **Personal 3D Portfolio** (https://mothilal.dev): High-performance animated 3D engineering portfolio built with Next.js 16, React Three Fiber, GSAP, and Tailwind CSS.
+
+## Frequently Asked Questions
+- **Who is Mothilal M?** Software Engineer and Python Developer building reliable backend systems and microservices.
+- **What is his availability?** Open to full-time backend and platform engineering roles, freelance software consulting, and remote positions.
+- **How to contact him?**
+  - Email: mothilal044@gmail.com
+  - LinkedIn: https://www.linkedin.com/in/mothilal-m-04803a227
+  - GitHub: https://github.com/Mothilal-M
+  - Website: https://mothilal.dev
