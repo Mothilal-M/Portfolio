@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import clsx from "clsx";
 import type { Project } from "@/lib/content";
 import { trackEvent } from "@/lib/analytics";
+import { VideoModal } from "./VideoModal";
 
 const FIELD_LABELS = ["Problem", "Role", "Outcome"] as const;
 
@@ -17,6 +18,7 @@ export function BentoCard({
   className?: string;
 }) {
   const ref = useRef<HTMLElement>(null);
+  const [videoOpen, setVideoOpen] = useState(false);
 
   const onPointerMove = (e: React.PointerEvent) => {
     const el = ref.current;
@@ -85,7 +87,7 @@ export function BentoCard({
           ))}
         </dl>
 
-        <div className="mt-auto flex gap-6">
+        <div className="mt-auto flex flex-wrap items-center gap-6">
           {project.links.live && (
             <a
               href={project.links.live}
@@ -123,6 +125,30 @@ export function BentoCard({
                 ↗
               </span>
             </a>
+          )}
+          {project.links.video && (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  trackEvent("project_click", {
+                    category: "projects",
+                    label: `${project.slug}_video`,
+                  });
+                  setVideoOpen(true);
+                }}
+                className="group/link inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-text"
+              >
+                <span>Watch Demo</span>
+                <span className="text-[10px]">▶</span>
+              </button>
+              <VideoModal
+                isOpen={videoOpen}
+                onClose={() => setVideoOpen(false)}
+                videoSrc={project.links.video}
+                title={`${project.title} — Walkthrough & Demo`}
+              />
+            </>
           )}
         </div>
       </div>

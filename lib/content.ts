@@ -146,7 +146,7 @@ export interface Project {
   role: string;
   outcome: string;
   tags: string[];
-  links: { live?: string; repo?: string };
+  links: { live?: string; repo?: string; video?: string };
   /** Bento sizing: lg = featured 2-col, tall = 1-col tall, wide = full-width */
   size: "lg" | "tall" | "wide";
 }

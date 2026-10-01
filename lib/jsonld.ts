@@ -221,10 +221,8 @@ export function projectsSchema() {
     "@type": "ItemList",
     name: "Featured Projects by Mothilal",
     description: "Software engineering projects and applications built by Mothilal M",
-    itemListElement: projects.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
+    itemListElement: projects.map((p, i) => {
+      const item: Record<string, unknown> = {
         "@type": "SoftwareApplication",
         name: p.title,
         description: `${p.problem} ${p.outcome}`,
@@ -233,8 +231,25 @@ export function projectsSchema() {
         author: { "@id": PERSON_ID },
         url: p.links.live || p.links.repo || site.url,
         keywords: p.tags.join(", "),
-      },
-    })),
+      };
+
+      if (p.links.video) {
+        item.video = {
+          "@type": "VideoObject",
+          name: `${p.title} Demonstration`,
+          description: `Interactive product and engineering demo of ${p.title} by Mothilal M`,
+          thumbnailUrl: `${site.url}/images/mothilal.jpg`,
+          contentUrl: p.links.video,
+          uploadDate: "2026-03-25T08:00:00+05:30",
+        };
+      }
+
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        item,
+      };
+    }),
   };
 }
 
