@@ -135,8 +135,9 @@ export function profilePageSchema() {
     about: { "@id": PERSON_ID },
     mainEntity: { "@id": PERSON_ID },
     inLanguage: "en-US",
-    datePublished: "2024-01-01",
-    dateModified: new Date().toISOString().split("T")[0],
+    dateCreated: "2024-01-01T00:00:00Z",
+    datePublished: "2024-01-01T00:00:00Z",
+    dateModified: new Date().toISOString(),
   };
 }
 

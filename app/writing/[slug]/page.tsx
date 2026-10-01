@@ -63,8 +63,8 @@ export default async function ArticlePage({ params }: PageProps) {
     headline: post.title,
     description: post.excerpt,
     url: `${site.url}/writing/${post.slug}`,
-    datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
+    datePublished: new Date(post.publishedAt).toISOString(),
+    dateModified: new Date(post.publishedAt).toISOString(),
     author: {
       "@type": "Person",
       name: person.name,

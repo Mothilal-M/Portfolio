@@ -36,7 +36,8 @@ export default function WritingIndexPage() {
       headline: p.title,
       description: p.excerpt,
       url: `${site.url}/writing/${p.slug}`,
-      datePublished: p.publishedAt,
+      datePublished: new Date(p.publishedAt).toISOString(),
+      dateModified: new Date(p.publishedAt).toISOString(),
       author: {
         "@type": "Person",
         name: person.name,
