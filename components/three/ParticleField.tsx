@@ -8,6 +8,8 @@ interface ParticleFieldProps {
   count: number;
   /** Cursor repulsion — disabled on touch devices */
   interactive: boolean;
+  color?: string;
+  speedMultiplier?: number;
 }
 
 const REPULSION_RADIUS = 1.5;
@@ -24,7 +26,12 @@ function mulberry32(seed: number) {
   };
 }
 
-export function ParticleField({ count, interactive }: ParticleFieldProps) {
+export function ParticleField({
+  count,
+  interactive,
+  color = "#d6ff3f",
+  speedMultiplier = 1,
+}: ParticleFieldProps) {
   const pointsRef = useRef<THREE.Points>(null);
   const pointerWorld = useRef(new THREE.Vector3());
   const scratch = useRef(new THREE.Vector3());
@@ -50,8 +57,8 @@ export function ParticleField({ count, interactive }: ParticleFieldProps) {
     const pts = pointsRef.current;
     if (!pts) return;
 
-    pts.rotation.y += delta * 0.04;
-    pts.rotation.x += delta * 0.012;
+    pts.rotation.y += delta * 0.04 * speedMultiplier;
+    pts.rotation.x += delta * 0.012 * speedMultiplier;
 
     if (!interactive) return;
 
@@ -89,7 +96,7 @@ export function ParticleField({ count, interactive }: ParticleFieldProps) {
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        color="#d6ff3f"
+        color={color}
         size={0.028}
         sizeAttenuation
         transparent

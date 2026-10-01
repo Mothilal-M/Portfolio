@@ -2,6 +2,7 @@ import { marquee, person } from "@/lib/content";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Marquee } from "@/components/ui/Marquee";
 import { HeroSceneLoader } from "@/components/three/HeroSceneLoader";
+import { SceneControls } from "@/components/three/SceneControls";
 
 /**
  * Sticky full-viewport hero: the rest of the page slides over it like
@@ -15,6 +16,9 @@ export function Hero() {
       <div aria-hidden className="absolute inset-0">
         <HeroSceneLoader />
       </div>
+
+      {/* Interactive 3D Canvas Controls */}
+      <SceneControls />
 
       <div
         data-animate="hero-text"

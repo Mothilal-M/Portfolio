@@ -6,6 +6,52 @@ import { AdaptiveDpr, PerformanceMonitor } from "@react-three/drei";
 import { ParticleField } from "./ParticleField";
 import { HeroGeometry } from "./HeroGeometry";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
+import { useSceneConfig } from "@/lib/sceneStore";
+
+function SceneElements({
+  isMobile,
+  degraded,
+}: {
+  isMobile: boolean;
+  degraded: boolean;
+}) {
+  const config = useSceneConfig();
+
+  const particleCount =
+    config.particleMode === "off"
+      ? 0
+      : config.particleMode === "supernova"
+      ? isMobile
+        ? 2500
+        : degraded
+        ? 3500
+        : 6000
+      : isMobile
+      ? 1200
+      : degraded
+      ? 1600
+      : 3000;
+
+  return (
+    <>
+      <ambientLight intensity={0.35} />
+      <pointLight position={[4, 3, 5]} intensity={18} color={config.colorHex} />
+      <pointLight position={[-5, -2, 3]} intensity={6} color="#f2efe8" />
+      <Suspense fallback={null}>
+        <HeroGeometry isMobile={isMobile} config={config} />
+        {particleCount > 0 && (
+          <ParticleField
+            key={`${particleCount}-${config.theme}`}
+            count={particleCount}
+            interactive={!isMobile && !degraded}
+            color={config.colorHex}
+            speedMultiplier={config.speed}
+          />
+        )}
+      </Suspense>
+    </>
+  );
+}
 
 /**
  * Hero Canvas. Dynamic-imported with ssr:false — never server-rendered.
@@ -27,8 +73,6 @@ export default function HeroScene() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const particleCount = isMobile ? 1200 : degraded ? 1600 : 3000;
-
   return (
     <div ref={wrapRef} className="h-full w-full">
       <Canvas
@@ -38,17 +82,7 @@ export default function HeroScene() {
         frameloop={inView ? "always" : "never"}
       >
         <PerformanceMonitor onDecline={() => setDegraded(true)}>
-          <ambientLight intensity={0.35} />
-          <pointLight position={[4, 3, 5]} intensity={18} color="#d6ff3f" />
-          <pointLight position={[-5, -2, 3]} intensity={6} color="#f2efe8" />
-          <Suspense fallback={null}>
-            <HeroGeometry isMobile={isMobile} />
-            <ParticleField
-              key={particleCount}
-              count={particleCount}
-              interactive={!isMobile && !degraded}
-            />
-          </Suspense>
+          <SceneElements isMobile={isMobile} degraded={degraded} />
         </PerformanceMonitor>
         <AdaptiveDpr pixelated />
       </Canvas>
