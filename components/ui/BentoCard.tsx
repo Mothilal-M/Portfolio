@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import clsx from "clsx";
 import type { Project } from "@/lib/content";
+import { trackEvent } from "@/lib/analytics";
 
 const FIELD_LABELS = ["Problem", "Role", "Outcome"] as const;
 
@@ -90,6 +91,12 @@ export function BentoCard({
               href={project.links.live}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent("project_click", {
+                  category: "projects",
+                  label: `${project.slug}_live`,
+                })
+              }
               className="group/link inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-text transition-colors hover:text-accent"
             >
               Live site
@@ -103,6 +110,12 @@ export function BentoCard({
               href={project.links.repo}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent("project_click", {
+                  category: "projects",
+                  label: `${project.slug}_repo`,
+                })
+              }
               className="group/link inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-text transition-colors hover:text-accent"
             >
               GitHub

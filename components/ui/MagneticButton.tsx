@@ -10,6 +10,9 @@ interface MagneticButtonProps {
   className?: string;
   type?: "button" | "submit";
   disabled?: boolean;
+  target?: string;
+  rel?: string;
+  onClick?: () => void;
   children: React.ReactNode;
 }
 
@@ -23,6 +26,9 @@ export function MagneticButton({
   className,
   type = "button",
   disabled,
+  target,
+  rel,
+  onClick,
   children,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -78,7 +84,9 @@ export function MagneticButton({
       <a
         href={href}
         className="inline-block p-1"
-        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        target={target ?? (external ? "_blank" : undefined)}
+        rel={rel ?? (external ? "noopener noreferrer" : undefined)}
+        onClick={onClick}
       >
         {inner}
       </a>
@@ -86,7 +94,7 @@ export function MagneticButton({
   }
 
   return (
-    <button type={type} disabled={disabled} className="inline-block p-1">
+    <button type={type} disabled={disabled} onClick={onClick} className="inline-block p-1">
       {inner}
     </button>
   );

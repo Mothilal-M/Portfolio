@@ -4,6 +4,8 @@ import { useState } from "react";
 import { site } from "@/lib/content";
 import { MagneticButton } from "./MagneticButton";
 
+import { trackEvent } from "@/lib/analytics";
+
 type Status = "idle" | "pending" | "success" | "error";
 
 const inputStyles =
@@ -19,6 +21,7 @@ export function ContactForm() {
     const data = Object.fromEntries(new FormData(form));
     if (data._honey) return; // bot filled the honeypot
     setStatus("pending");
+    trackEvent("generate_lead", { category: "contact", label: "form_attempt" });
     try {
       const res = await fetch(site.formEndpoint, {
         method: "POST",
@@ -33,9 +36,11 @@ export function ContactForm() {
       });
       if (!res.ok) throw new Error(`FormSubmit responded ${res.status}`);
       setStatus("success");
+      trackEvent("contact_form_success", { category: "contact", label: "form_submitted" });
       form.reset();
     } catch {
       setStatus("error");
+      trackEvent("contact_form_error", { category: "contact", label: "form_failed" });
     }
   }
 

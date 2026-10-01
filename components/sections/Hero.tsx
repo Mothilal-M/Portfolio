@@ -66,6 +66,14 @@ export function Hero() {
           </p>
           <div data-animate="hero-cta" className="flex shrink-0 flex-wrap items-center gap-3">
             <MagneticButton href="#work">View work ↓</MagneticButton>
+            <MagneticButton
+              href={person.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="outline"
+            >
+              Resume / LinkedIn ↗
+            </MagneticButton>
             <MagneticButton href="#contact" variant="outline">
               Get in touch
             </MagneticButton>
