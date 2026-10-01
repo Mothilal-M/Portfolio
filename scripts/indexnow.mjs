@@ -11,6 +11,7 @@ async function submitIndexNow() {
     keyLocation: "https://mothilal.dev/9F2259B03F5318EEEC2602EE64499BAF.txt",
     urlList: [
       "https://mothilal.dev/",
+      "https://mothilal.dev/resume",
     ],
   };
 
