@@ -232,7 +232,7 @@ export const nav = [
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Work", href: "#work" },
-  { label: "Writing", href: "/writing" },
+  { label: "Writing", href: "#writing" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ] as const;

@@ -6,7 +6,7 @@ export function FAQ() {
     <section id="faq" className="py-section">
       <div className="mx-auto w-full max-w-[90rem] px-6 md:px-12">
         <SectionHeading
-          index="05"
+          index="06"
           eyebrow="FAQ"
           title="Frequently asked questions."
         />
