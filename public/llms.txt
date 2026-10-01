@@ -25,6 +25,10 @@ Mothilal M is a Software Engineer and Python Developer based in India (Dharmapur
 - **College Admission Seat Matrix**: Automated college seat allocation and reporting management system powered by PHP, MySQL, and JavaScript.
 - **Personal 3D Portfolio** (https://mothilal.dev): High-performance animated 3D engineering portfolio built with Next.js 16, React Three Fiber, GSAP, and Tailwind CSS.
 
+## Technical Articles & Case Studies
+- **Architecting Scalable FastAPI Microservices on Google Cloud Run** (https://mothilal.dev/writing/architecting-scalable-fastapi-microservices-gcp): Production architectural guide covering async database connection pooling, multi-stage Docker builds, and Redis caching.
+- **Building an Interactive 3D Portfolio with Next.js 16, React Three Fiber, and GSAP** (https://mothilal.dev/writing/building-interactive-3d-portfolio-nextjs-r3f-gsap): In-depth look into WebGL shaders, client boundaries, GSAP ticker synchronization, and Generative Engine Optimization.
+
 ## Frequently Asked Questions
 - **Who is Mothilal M?** Software Engineer and Python Developer building reliable backend systems and microservices.
 - **Is Mothilal an employee at 10xscale.ai?** Yes, he is a Software Engineer at 10xscale.ai in Hyderabad.

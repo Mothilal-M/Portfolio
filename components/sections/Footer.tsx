@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { footer, person } from "@/lib/content";
 import { LocalClock } from "@/components/ui/LocalClock";
 
@@ -14,7 +15,19 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-3 md:items-end">
-            <div className="flex gap-6">
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+              <Link
+                href="/writing"
+                className="font-mono text-xs uppercase tracking-[0.2em] text-muted transition-colors hover:text-accent"
+              >
+                Writing
+              </Link>
+              <Link
+                href="/resume"
+                className="font-mono text-xs uppercase tracking-[0.2em] text-muted transition-colors hover:text-accent"
+              >
+                Resume
+              </Link>
               <a
                 href={person.links.github}
                 target="_blank"
@@ -40,6 +53,13 @@ export function Footer() {
               >
                 Email
               </a>
+              <Link
+                href="/feed.xml"
+                target="_blank"
+                className="font-mono text-xs uppercase tracking-[0.2em] text-muted transition-colors hover:text-accent"
+              >
+                RSS
+              </Link>
             </div>
             <p className="font-mono text-xs tracking-wider text-muted">{footer.location}</p>
             <LocalClock />

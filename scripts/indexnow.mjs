@@ -12,6 +12,9 @@ async function submitIndexNow() {
     urlList: [
       "https://mothilal.dev/",
       "https://mothilal.dev/resume",
+      "https://mothilal.dev/writing",
+      "https://mothilal.dev/writing/architecting-scalable-fastapi-microservices-gcp",
+      "https://mothilal.dev/writing/building-interactive-3d-portfolio-nextjs-r3f-gsap",
     ],
   };
 
