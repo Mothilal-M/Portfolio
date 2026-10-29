@@ -24,7 +24,7 @@ git push -u origin rebuild/next16
 - [ ] `https://<project>.vercel.app/animated-portfolio.html` → redirects to `/`
 - [ ] DevTools → Rendering → "Emulate prefers-reduced-motion" → calm static variant
 - [ ] Lighthouse (mobile, incognito): Perf ≥ 90, SEO 100, A11y ≥ 95
-- [ ] Share preview: paste the URL in [opengraph.xyz](https://www.opengraph.xyz) — the dark OG card should show
+- [ ] Share preview: paste the URL in [opengraph.dev](https://www.opengraph.dev) — the dark OG card should show
 
 ## 4. DNS cutover (at your registrar)
 
